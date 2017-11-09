@@ -39,6 +39,10 @@ init_root
 extract_install linux-steam-integration
 extract_install steam
 
+# Now unbugger Steam using lib not lib64..
+mv "$ROOTDIR"/usr/lib/* "$ROOTDIR"/usr/lib64/.
+rmdir "$ROOTDIR"/usr/lib
+
 # Now lets cook a snap
 cook_snap linux-steam-integration
 
