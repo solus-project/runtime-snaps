@@ -69,9 +69,20 @@ function add_repo()
     eopkg add-repo -D "$ROOTDIR" "Solus" $1
 }
 
+# Placeholder until we can have custom packages for this runtime
+# Basically the LDM detection will fail and the default mesa symlinks will
+# be put in place.
 function configure_pending()
 {
-    echo "NOT YET IMPLEMENTED :O"
+    chroot "$ROOTDIR" linux-driver-management configure gpu
+
+    # This also needs a better story, maybe just running eopkg configure pending eh? :)
+    for dirn in "$ROOTDIR"/usr/share/icons/*; do
+        gtk-update-icon-cache -f "$dirn"
+    done
+
+    # Update font cache
+    chroot "$ROOTDIR" fc-cache -fv
 }
 
 function clean_root()
@@ -94,14 +105,6 @@ function clean_root()
 
     # Consider nuking system locales!
     # rm -rf "$ROOTDIR/usr/share/locale"
-}
-
-# Placeholder until we can have custom packages for this runtime
-# Basically the LDM detection will fail and the default mesa symlinks will
-# be put in place.
-function fix_solus_derp()
-{
-    chroot "$ROOTDIR" linux-driver-management configure gpu
 }
 
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
@@ -129,8 +132,8 @@ install_package --ignore-safety $(cat packages)
 # Now install our graphical packages
 install_package --ignore-safety $(cat packages.gui)
 
-# Undo some solus issues with mesa
-fix_solus_derp
+# Ensure everything is good to go
+configure_pending
 
 # TODO: Lock the root, configure it
 
