@@ -43,6 +43,15 @@ extract_install steam
 mv "$ROOTDIR"/usr/lib/* "$ROOTDIR"/usr/lib64/.
 rmdir "$ROOTDIR"/usr/lib
 
+# Use bin/ only
+mkdir "$ROOTDIR/bin"
+mv "$ROOTDIR"/usr/bin/* "$ROOTDIR"/bin/.
+rmdir "$ROOTDIR/usr/bin"
+
+install -m 00755 ./steam-wrap.sh "$ROOTDIR/bin/."
+install -m 00755 ./settings-wrap.sh "$ROOTDIR/bin/."
+
+
 # Now lets cook a snap
 cook_snap linux-steam-integration
 
