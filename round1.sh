@@ -96,6 +96,14 @@ function clean_root()
     # rm -rf "$ROOTDIR/usr/share/locale"
 }
 
+# Placeholder until we can have custom packages for this runtime
+# Basically the LDM detection will fail and the default mesa symlinks will
+# be put in place.
+function fix_solus_derp()
+{
+    chroot "$ROOTDIR" linux-driver-management configure gpu
+}
+
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
 # bake a snap for us
 function cook_snap()
@@ -120,6 +128,9 @@ install_package --ignore-safety $(cat packages)
 
 # Now install our graphical packages
 install_package --ignore-safety $(cat packages.gui)
+
+# Undo some solus issues with mesa
+fix_solus_derp
 
 # TODO: Lock the root, configure it
 
