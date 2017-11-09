@@ -12,6 +12,7 @@ gawk
 gettext
 grep
 gzip
+libcap2
 libgcrypt
 libgudev
 libgusb
