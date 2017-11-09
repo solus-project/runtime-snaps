@@ -9,4 +9,4 @@ export PATH="/bin:$PATH"
 # "$SNAP"/bin/steam
 
 # TESTING: We need to actually make LSI know how to do this
-LD_AUDIT="$SNAP/usr/\$LIB/liblsi-intercept.so" LD_PRELOAD="$SNAP/usr/\$LIB/liblsi-redirect.so" LSI_DEBUG=1 STEAM_RUNTIME=0 /usr/lib64/steam/steam
+LD_AUDIT="$SNAP/usr/\$LIB/liblsi-intercept.so" LD_PRELOAD="$SNAP/usr/\$LIB/liblsi-redirect.so" LSI_DEBUG=1 STEAM_RUNTIME=0 $SNAP/usr/lib64/steam/steam
