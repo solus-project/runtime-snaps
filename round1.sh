@@ -74,7 +74,7 @@ function add_repo()
 # be put in place.
 function configure_pending()
 {
-    chroot "$ROOTDIR" /sbin/ldconfig -x
+    chroot "$ROOTDIR" /sbin/ldconfig -X
 
     chroot "$ROOTDIR" linux-driver-management configure gpu
 
