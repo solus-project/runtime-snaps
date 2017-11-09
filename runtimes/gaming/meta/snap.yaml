@@ -11,3 +11,7 @@ description:
   all of the relevant components to build a stable gaming orientated
   application deployed through snap.
 type: base
+
+apps:
+  solus-runtime-gaming:
+    command: /bin/bash
