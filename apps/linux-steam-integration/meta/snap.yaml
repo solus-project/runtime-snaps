@@ -17,8 +17,15 @@ apps:
     plugs:
       - unity7
       - home
+      - network
+      - opengl
+      - pulseaudio
+      - x11
   lsi-settings:
     command: /usr/bin/lsi-settings
     plugs:
       - unity7
       - home
+      - opengl
+      - pulseaudio
+      - x11
