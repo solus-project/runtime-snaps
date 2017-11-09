@@ -28,8 +28,11 @@ function init_root()
 function snappify()
 {
     mkdir -p $ROOTDIR/var/lib/snapd
+    mkdir -p $ROOTDIR/var/log
     mkdir -p $ROOTDIR/var/snap
     mkdir -p $ROOTDIR/lib/modules
+    mkdir -p $ROOTDIR/usr/src
+    mkdir -p $ROOTDIR/media
 
     # UGLY HACKS: Get this fixed in snapd confinement policy!
     # We use lib64, snapd defines "lib" within the target
