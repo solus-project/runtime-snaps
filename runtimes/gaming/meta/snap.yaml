@@ -1,0 +1,11 @@
+name: solus-runtime-gaming
+version: 0.0.0
+summary: Solus Gaming Runtime
+description:
+  The Solus Gaming Runtime provides a Solus-derived runtime for
+  other snaps to base on.
+
+  This snap is required for linux-steam-integration, and provides
+  all of the relevant components to build a stable gaming orientated
+  application deployed through snap.
+type: base
