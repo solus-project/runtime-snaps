@@ -24,6 +24,10 @@ Applications:
 
  - `linux-steam-integration` + `steam` (single snap)
 
+Note that for now we'll not be focusing on strict confinement, so the snaps
+should be installed with `--devmode` until such point as proper confinement
+is feasible.
+
 runtime-snaps is a [Solus project](https://solus-project.com/)
 
 ![logo](https://build.solus-project.com/logo.png)
