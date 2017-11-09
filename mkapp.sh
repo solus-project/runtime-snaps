@@ -26,6 +26,17 @@ function extract_install()
     rm -rf tmp
 }
 
+function extract_install_local()
+{
+    mkdir tmp
+    pushd tmp
+    cp -v $1 .
+    uneopkg *.eopkg
+    cp -Rva install/* "$ROOTDIR/."
+    popd
+    rm -rf tmp
+}
+
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
 # bake a snap for us
 function cook_snap()
@@ -37,6 +48,7 @@ function cook_snap()
 init_root
 
 extract_install linux-steam-integration
+# extract_install_local /home/ufee1dead/Solus/linux-steam-integration/linux-steam-integration-0.6-21-1-x86_64.eopkg
 extract_install steam
 
 # Now unbugger Steam using lib not lib64..
