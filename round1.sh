@@ -8,6 +8,8 @@ if [[ "$EUID" != "0" ]]; then
 fi
 
 ROOTDIR="`pwd`/ROOT"
+BASEDIR="`pwd`"
+RUNTIME_DIR="$BASEDIR/runtimes"
 
 # Bit of house keeping to ensure package managers don't jank up the rootfs
 function init_root()
@@ -67,6 +69,14 @@ function clean_root()
     # rm -rf "$ROOTDIR/usr/share/locale"
 }
 
+# Cheap and dirty, copy the named runtime meta into the root and tell it to
+# bake a snap for us
+function cook_snap()
+{
+    cp -Rv $RUNTIME_DIR/$1/meta "$ROOTDIR/."
+    snap pack "$ROOTDIR"
+}
+
 
 # Bring up the root tree
 init_root
@@ -85,3 +95,6 @@ install_package --ignore-safety $(cat packages)
 
 # Now lets clean the rootfs out
 clean_root
+
+# Now lets cook a snap
+cook_snap gaming
