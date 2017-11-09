@@ -1,3 +1,10 @@
 at-spi2-atk
 libgtk-3
 linux-driver-management
+
+gdk-pixbuf
+hicolor-icon-theme
+adwaita-icon-theme
+font-clear-sans-ttf
+font-roboto-ttf
+noto-sans-ttf
