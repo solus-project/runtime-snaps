@@ -22,7 +22,7 @@ apps:
       - opengl
       - pulseaudio
       - x11
-  lsi-settings:
+  settings:
     command: /usr/bin/lsi-settings
     plugs:
       - unity7
