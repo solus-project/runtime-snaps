@@ -1,6 +1,8 @@
 name: solus-runtime-gaming
 version: 0.0.0
 summary: Solus Gaming Runtime
+architectures:
+  - amd64
 description:
   The Solus Gaming Runtime provides a Solus-derived runtime for
   other snaps to base on.
