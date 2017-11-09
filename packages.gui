@@ -2,6 +2,7 @@ at-spi2-atk
 libgtk-3
 linux-driver-management
 
+librsvg
 gdk-pixbuf
 hicolor-icon-theme
 adwaita-icon-theme
