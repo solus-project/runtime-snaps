@@ -115,6 +115,9 @@ install_package baselayout --ignore-safety
 # Totally ignore system.base safety to minimise the system
 install_package --ignore-safety $(cat packages)
 
+# Now install our graphical packages
+install_package --ignore-safety $(cat packages.gui)
+
 # TODO: Lock the root, configure it
 
 # Now lets clean the rootfs out
