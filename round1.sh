@@ -27,7 +27,7 @@ function init_root()
 # Make the rootfs happy enough for snapd
 function snappify()
 {
-    mkdir -p $ROOTDIR/var/snap
+    mkdir -p $ROOTDIR/var/lib/snap
 }
 
 # Desparately attempt to install a package
