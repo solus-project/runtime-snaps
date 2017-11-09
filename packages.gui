@@ -2,6 +2,8 @@ at-spi2-atk
 libgtk-3
 linux-driver-management
 
+zenity
+
 librsvg
 gdk-pixbuf
 hicolor-icon-theme
