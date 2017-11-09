@@ -15,7 +15,6 @@ glibc-32bit
 glib-networking-32bit
 gmp-32bit
 gnome-themes-standard-32bit
-gnutls-32bit
 gtk2-engine-murrine-32bit
 harfbuzz-32bit
 intel-tbb-32bit
@@ -27,6 +26,7 @@ libgcc-32bit
 libgcrypt11-32bit
 libgcrypt-32bit
 libglu-32bit
+libgnutls-32bit
 libgomp-32bit
 libgudev-32bit
 libidn-32bit
