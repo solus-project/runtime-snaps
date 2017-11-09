@@ -74,6 +74,8 @@ function add_repo()
 # be put in place.
 function configure_pending()
 {
+    chroot "$ROOTDIR" /sbin/ldconfig -x
+
     chroot "$ROOTDIR" linux-driver-management configure gpu
 
     # Update mime cache
