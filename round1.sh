@@ -9,6 +9,19 @@ fi
 
 ROOTDIR="`pwd`/ROOT"
 
+# Bit of house keeping to ensure package managers don't jank up the rootfs
+function init_root()
+{
+    if [[ ! -d "$ROOTDIR" ]]; then
+        mkdir $ROOTDIR
+    fi
+
+    mkdir -p $ROOTDIR/run/lock
+    mkdir -p $ROOTDIR/var
+    ln -s ../run/lock $ROOTDIR/var/lock
+    ln -s ../run $ROOTDIR/var/run
+}
+
 # Desparately attempt to install a package
 function install_package()
 {
@@ -32,9 +45,9 @@ function configure_pending()
     echo "NOT YET IMPLEMENTED :O"
 }
 
-if [[ ! -d "$ROOTDIR" ]]; then
-    mkdir $ROOTDIR
-fi
+
+# Bring up the root tree
+init_root
 
 # Let's get a repo going.
 add_repo "https://packages.solus-project.com/unstable/eopkg-index.xml.xz"
