@@ -30,6 +30,12 @@ function snappify()
     mkdir -p $ROOTDIR/var/lib/snapd
     mkdir -p $ROOTDIR/var/snap
     mkdir -p $ROOTDIR/lib/modules
+
+    # UGLY HACKS: Get this fixed in snapd confinement policy!
+    # We use lib64, snapd defines "lib" within the target
+    rm $ROOTDIR/lib
+    mv $ROOTDIR/lib64 $ROOTDIR/lib
+    ln -sv lib $ROOTDIR/lib64
 }
 
 # Desparately attempt to install a package
