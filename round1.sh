@@ -76,6 +76,9 @@ function configure_pending()
 {
     chroot "$ROOTDIR" linux-driver-management configure gpu
 
+    # Update mime cache
+    chroot "$ROOTDIR" update-mime-database /usr/share/mime
+
     # This also needs a better story, maybe just running eopkg configure pending eh? :)
     for dirn in "$ROOTDIR"/usr/share/icons/*; do
         gtk-update-icon-cache -f "$dirn"
@@ -83,9 +86,6 @@ function configure_pending()
 
     # Update font cache
     chroot "$ROOTDIR" fc-cache -fv
-
-    # Update mime cache
-    chroot "$ROOTDIR" update-mime-database /usr/share/mime
 }
 
 function clean_root()
