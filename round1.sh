@@ -59,6 +59,12 @@ function clean_root()
     # Clean out dbs+cruft
     rm -rf "$ROOTDIR/var/db"
     rm -rf "$ROOTDIR/var/log"
+
+    # Nuke locale archive from glibc
+    rm -rf "$ROOTDIR/usr/lib64/locale"
+
+    # Consider nuking system locales!
+    # rm -rf "$ROOTDIR/usr/share/locale"
 }
 
 
@@ -72,6 +78,8 @@ add_repo "https://packages.solus-project.com/unstable/eopkg-index.xml.xz"
 install_package baselayout --ignore-safety
 
 # Now lets fire in our core component, i.e. a working system.
+# TODO: Be very specific about the core install and skip as many packages
+# as we can to get around the wide-arse nature of system.base
 install_component system.base
 
 # TODO: Lock the root, configure it
