@@ -37,6 +37,9 @@ function snappify()
     mkdir -p $ROOTDIR/media
     mkdir -p $ROOTDIR/snap
 
+    # OK so in theory we could install snapd inside but meh.
+    install -m 00755 /usr/lib/udev/snappy-app-dev $ROOTDIR/lib/udev/.
+
     # UGLY HACKS: Get this fixed in snapd confinement policy!
     # We use lib64, snapd defines "lib" within the target
     rm $ROOTDIR/lib
