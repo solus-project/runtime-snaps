@@ -27,18 +27,25 @@ function init_root()
 # Make the rootfs happy enough for snapd
 function snappify()
 {
+    # Needed in general for everyone
     mkdir -p $ROOTDIR/var/lib/snapd
     mkdir -p $ROOTDIR/var/log
     mkdir -p $ROOTDIR/var/snap
     mkdir -p $ROOTDIR/lib/modules
     mkdir -p $ROOTDIR/usr/src
+    mkdir -p $ROOTDIR/usr/lib/snapd
     mkdir -p $ROOTDIR/media
+    mkdir -p $ROOTDIR/snap
 
     # UGLY HACKS: Get this fixed in snapd confinement policy!
     # We use lib64, snapd defines "lib" within the target
     rm $ROOTDIR/lib
     mv $ROOTDIR/lib64 $ROOTDIR/lib
     ln -sv lib $ROOTDIR/lib64
+    # Repeat of the above
+    rm $ROOTDIR/usr/lib
+    mv $ROOTDIR/usr/lib64 $ROOTDIR/usr/lib
+    ln -sv lib $ROOTDIR/usr/lib64
 }
 
 # Desparately attempt to install a package
