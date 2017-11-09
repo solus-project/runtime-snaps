@@ -87,6 +87,9 @@ function configure_pending()
     # Update ldconfig now
     chroot "$ROOTDIR" /sbin/ldconfig -X
 
+    # Ensure SSL certificates work
+    chroot "$ROOTDIR" c_rehash
+
     # Update mime cache
     chroot "$ROOTDIR" update-mime-database /usr/share/mime
 

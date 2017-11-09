@@ -1,5 +1,6 @@
 bash
 bzip2
+ca-certs
 coreutils
 cpio
 curl
@@ -18,6 +19,7 @@ libgudev
 libgusb
 libusb
 openssl
+perl
 polkit
 popt
 procps-ng
