@@ -83,6 +83,9 @@ function configure_pending()
 
     # Update font cache
     chroot "$ROOTDIR" fc-cache -fv
+
+    # Update mime cache
+    chroot "$ROOTDIR" update-mime-database /usr/share/mime
 }
 
 function clean_root()
