@@ -24,6 +24,12 @@ function init_root()
     ln -s ../run $ROOTDIR/var/run
 }
 
+# Make the rootfs happy enough for snapd
+function snappify()
+{
+    mkdir -p $ROOTDIR/var/snap
+}
+
 # Desparately attempt to install a package
 function install_package()
 {
@@ -95,6 +101,9 @@ install_package --ignore-safety $(cat packages)
 
 # Now lets clean the rootfs out
 clean_root
+
+# Make snapd happy
+snappify
 
 # Now lets cook a snap
 cook_snap gaming
