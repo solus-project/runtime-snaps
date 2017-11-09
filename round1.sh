@@ -78,9 +78,8 @@ add_repo "https://packages.solus-project.com/unstable/eopkg-index.xml.xz"
 install_package baselayout --ignore-safety
 
 # Now lets fire in our core component, i.e. a working system.
-# TODO: Be very specific about the core install and skip as many packages
-# as we can to get around the wide-arse nature of system.base
-install_component system.base
+# Totally ignore system.base safety to minimise the system
+install_package --ignore-safety $(cat packages)
 
 # TODO: Lock the root, configure it
 
