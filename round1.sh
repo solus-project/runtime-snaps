@@ -87,8 +87,6 @@ function configure_pending()
     # Update ldconfig now
     chroot "$ROOTDIR" /sbin/ldconfig -X
 
-    chroot "$ROOTDIR" linux-driver-management configure gpu
-
     # Update mime cache
     chroot "$ROOTDIR" update-mime-database /usr/share/mime
 
