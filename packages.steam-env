@@ -12,8 +12,10 @@ gconf-32bit
 glew110-32bit
 glew-32bit
 glibc-32bit
+glib-networking-32bit
 gmp-32bit
 gnome-themes-standard-32bit
+gnutls-32bit
 gtk2-engine-murrine-32bit
 harfbuzz-32bit
 intel-tbb-32bit
