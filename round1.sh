@@ -146,6 +146,9 @@ install_package --ignore-safety $(cat packages)
 # Now install our graphical packages
 install_package --ignore-safety $(cat packages.gui)
 
+# Lastly, prep our runtime packages (+emul32 stuff)
+install_package --ignore-safety $(cat packages.steam-env)
+
 # Ensure everything is good to go
 configure_pending
 
