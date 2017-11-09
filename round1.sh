@@ -45,9 +45,36 @@ function configure_pending()
     echo "NOT YET IMPLEMENTED :O"
 }
 
+function clean_root()
+{
+    # Nuke system files that take up space we're not wanting to use..
+    rm -rf "$ROOTDIR/usr/share/doc"
+    rm -rf "$ROOTDIR/usr/share/man"
+    rm -rf "$ROOTDIR/usr/share/info"
+
+    # Clean out package manager noise
+    rm -rf "$ROOTDIR/var/lib/eopkg"
+    rm -rf "$ROOTDIR/var/cache/eopkg"
+
+    # Clean out dbs+cruft
+    rm -rf "$ROOTDIR/var/db"
+    rm -rf "$ROOTDIR/var/log"
+}
+
 
 # Bring up the root tree
 init_root
 
 # Let's get a repo going.
 add_repo "https://packages.solus-project.com/unstable/eopkg-index.xml.xz"
+
+# Must have our baselayout first.
+install_package baselayout --ignore-safety
+
+# Now lets fire in our core component, i.e. a working system.
+install_component system.base
+
+# TODO: Lock the root, configure it
+
+# Now lets clean the rootfs out
+clean_root
