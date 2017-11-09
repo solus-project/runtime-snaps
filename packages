@@ -6,7 +6,6 @@ curl
 dbus
 dbus-glib
 e2fsprogs
-expat
 file
 findutils
 gawk
@@ -17,13 +16,11 @@ libgudev
 libgusb
 libusb
 openssl
-pam
 polkit
 popt
 procps-ng
 psmisc
 sed
-shadow
 systemd
 tar
 time
