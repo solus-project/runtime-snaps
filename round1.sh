@@ -105,7 +105,7 @@ function install_public()
 {
     # Due to some madness in apparmor, we can only execute host stuff that lives in /bin,
     # and not /usr/bin, from the main snap..
-    ln -sv ../usr/bin/zenity "$ROOTDIR/bin/."
+    cp -v "$ROOTDIR/usr/bin/zenity" "$ROOTDIR/bin/."
 }
 
 function clean_root()
