@@ -101,13 +101,6 @@ function configure_pending()
     chroot "$ROOTDIR" fc-cache -fv
 }
 
-function install_public()
-{
-    # Due to some madness in apparmor, we can only execute host stuff that lives in /bin,
-    # and not /usr/bin, from the main snap..
-    cp -v "$ROOTDIR/usr/bin/zenity" "$ROOTDIR/bin/."
-}
-
 function clean_root()
 {
     # Nuke system files that take up space we're not wanting to use..
@@ -157,8 +150,6 @@ install_package --ignore-safety $(cat packages.gui)
 
 # Ensure everything is good to go
 configure_pending
-
-install_public
 
 # TODO: Lock the root, configure it
 
