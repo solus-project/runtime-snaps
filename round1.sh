@@ -74,6 +74,17 @@ function add_repo()
 # be put in place.
 function configure_pending()
 {
+    # Workaround LD_LIBRARY_PATH not working for snap nvidia
+    mkdir -p $ROOTDIR/etc/ld.so.conf.d
+    echo "/var/lib/snapd/lib/gl" >> $ROOTDIR/etc/ld.so.conf.d/00-snapd.conf
+    echo "/usr/lib" >> $ROOTDIR/etc/ld.so.conf.d/00-snapd.conf
+    echo "/usr/lib64" >> $ROOTDIR/etc/ld.so.conf.d/00-snapd.conf
+    echo "/usr/lib32" >> $ROOTDIR/etc/ld.so.conf.d/00-snapd.conf
+    echo "/lib" >> $ROOTDIR/etc/ld.so.conf.d/00-snapd.conf
+    echo "/lib64" >> $ROOTDIR/etc/ld.so.conf.d/00-snapd.conf
+    echo "/lib32" >> $ROOTDIR/etc/ld.so.conf.d/00-snapd.conf
+
+    # Update ldconfig now
     chroot "$ROOTDIR" /sbin/ldconfig -X
 
     chroot "$ROOTDIR" linux-driver-management configure gpu
