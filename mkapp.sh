@@ -1,15 +1,25 @@
 #!/bin/bash
-set -x
+if [[ "$EUID" != "0" ]]; then
+    echo "I .. AM... not g.. ROOT"
+    exit 1
+fi
 
-ROOTDIR="`pwd`/APP_ROOT"
 BASEDIR="`pwd`"
+WORKDIR="$BASEDIR/WORKDIR"
+ROOTDIR="$WORKDIR/APP_ROOT"
 APPS_DIR="$BASEDIR/apps"
+PACKAGE_OUT_DIR="$WORKDIR/PACKAGES"
+PACKAGE_IN_DIR="$BASEDIR/support_packages"
 
 # Bit of house keeping to ensure package managers don't jank up the rootfs
 function init_root()
 {
     if [[ ! -d "$ROOTDIR" ]]; then
-        mkdir $ROOTDIR
+        mkdir -p $ROOTDIR
+    fi
+
+    if [[ ! -d "$PACKAGE_OUT_DIR" ]]; then
+        mkdir -p "$PACKAGE_OUT_DIR"
     fi
 }
 
@@ -37,6 +47,21 @@ function extract_install_local()
     rm -rf tmp
 }
 
+# Build a single package
+function build_one()
+{
+    local pkg="$1"
+    local workdir="$PACKAGE_OUT_DIR/$pkg"
+    local sourcedir="$PACKAGE_IN_DIR/$pkg"
+
+    mkdir -p "$workdir"
+    mkdir -p "$sourcedir"
+
+    pushd $workdir
+    solbuild -p unstable-x86_64 build $sourcedir/package.yml
+    mv *.eopkg "$PACKAGE_OUT_DIR/."
+}
+
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
 # bake a snap for us
 function cook_snap()
@@ -45,25 +70,13 @@ function cook_snap()
     snap pack "$ROOTDIR"
 }
 
+set -x
+set -e
+
 init_root
 
-extract_install linux-steam-integration
-# extract_install_local /home/ufee1dead/Solus/linux-steam-integration/linux-steam-integration-0.6-21-1-x86_64.eopkg
-extract_install steam
-
-# Now unbugger Steam using lib not lib64..
-mv "$ROOTDIR"/usr/lib/* "$ROOTDIR"/usr/lib64/.
-rmdir "$ROOTDIR"/usr/lib
-
-# Use bin/ only
-mkdir "$ROOTDIR/bin"
-mv "$ROOTDIR"/usr/bin/* "$ROOTDIR"/bin/.
-rmdir "$ROOTDIR/usr/bin"
-
-install -m 00755 ./steam-wrap.sh "$ROOTDIR/bin/."
-install -m 00755 ./settings-wrap.sh "$ROOTDIR/bin/."
-
+build_one linux-steam-integration
 
 # Now lets cook a snap
-cook_snap linux-steam-integration
+# cook_snap linux-steam-integration
 
