@@ -84,3 +84,5 @@ systemd-32bit
 tcp_wrappers-32bit
 xz-32bit
 zlib-32bit
+
+vulkan
