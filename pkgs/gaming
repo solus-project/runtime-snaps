@@ -62,6 +62,7 @@ libxxf86vm-32bit
 mesalib-32bit
 mpg123-32bit
 nas-32bit
+ncurses-32bit
 network-manager-32bit
 openal-soft-32bit
 openldap-32bit
