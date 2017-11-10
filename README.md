@@ -35,8 +35,15 @@ runtime-snaps is a [Solus project](https://solus-project.com/)
 How to build and run
 ====================
 
-You must be on Solus to **build** these snaps. You will also require a minimum
-snapd version of `2.29.2` with the following patches applied:
+You must be on Solus to **build** these snaps. You do not need to be on Solus
+to **run** these snaps.
+
+### Dependencies
+
+ - snapd 2.29.2 + patches
+ - solbuild (ensure this has been initialised on `unstable-x86_64`)
+
+### `snapd` patches
 
  - https://github.com/snapcore/snapd/commit/ec4f3c0774620dd2bb6df765b337fa8a67d2afc8 ([patch](https://github.com/snapcore/snapd/commit/ec4f3c0774620dd2bb6df765b337fa8a67d2afc8.patch))
  - https://github.com/snapcore/snapd/pull/4199 ([patch](https://patch-diff.githubusercontent.com/raw/snapcore/snapd/pull/4199.patch))
