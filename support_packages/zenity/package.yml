@@ -13,11 +13,17 @@ description: |
 builddeps  :
     - pkgconfig(gtk+-3.0)
     - pkgconfig(libnotify)
+    - pkgconfig(yelp-xsl)
+    - gnome-common
     - itstool
+    - yelp-tools-devel
 setup      : |
     %patch -p1 < $pkgfiles/0001-Build-all-Zenity-resources-directly-into-the-binary.patch
-    %configure --bindir=/bin
+    %reconfigure --bindir=/bin
 build      : |
     %make
 install    : |
     %make_install
+    # Don't want this stuff in the snap
+    rm -rf $installdir/usr/share/help
+    rm -rf $installdir/usr/share/man
