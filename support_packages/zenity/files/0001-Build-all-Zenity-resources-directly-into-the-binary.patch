@@ -1,0 +1,384 @@
+From b77aaaf0fa4188a025a7c69e58e4325833ce14bb Mon Sep 17 00:00:00 2001
+From: Ikey Doherty <ikey@solus-project.com>
+Date: Fri, 10 Nov 2017 21:59:35 +0000
+Subject: [PATCH] Build all Zenity resources directly into the binary
+
+This makes it much easier to have a relocatable Zenity build that isn't
+dependent on fixed file paths, by having our .ui file and images contained
+within the final executable.
+
+Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+---
+ configure.ac                   |  3 +++
+ data/Makefile.am               |  8 ++------
+ data/zenity_data.gresource.xml | 20 ++++++++++++++++++++
+ src/Makefile.am                | 38 ++++++++++++++++++++++++++++++++------
+ src/about.c                    | 16 ++++++++--------
+ src/calendar.c                 |  2 +-
+ src/entry.c                    |  2 +-
+ src/fileselection.c            |  2 +-
+ src/progress.c                 |  2 +-
+ src/scale.c                    |  2 +-
+ src/text.c                     |  2 +-
+ src/tree.c                     |  2 +-
+ src/util.c                     | 18 +++++-------------
+ src/util.h                     |  5 ++---
+ src/zenity.gresource.xml       |  6 ++++++
+ 15 files changed, 85 insertions(+), 43 deletions(-)
+ create mode 100644 data/zenity_data.gresource.xml
+ create mode 100644 src/zenity.gresource.xml
+
+diff --git a/configure.ac b/configure.ac
+index 5075ec1..31261a4 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -20,6 +20,9 @@ PKG_CHECK_MODULES([ZENITY],[gtk+-3.0 >= $GTK_REQUIRED glib-2.0])
+ AC_SUBST([ZENITY_CFLAGS])
+ AC_SUBST([ZENITY_LIBS])
+ 
++# Check for glib-compile-resources
++AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
++
+ dnl *************************
+ dnl Check for the GTK+ backend, if it's X11, we -lX11
+ dnl *************************
+diff --git a/data/Makefile.am b/data/Makefile.am
+index cc18511..d64b798 100644
+--- a/data/Makefile.am
++++ b/data/Makefile.am
+@@ -1,13 +1,9 @@
+-clothesdir = $(datadir)/zenity/clothes
+-clothes_DATA = \
++images = \
+ 	monk.png		\
+ 	gnome-tshirt.png	\
+ 	sunglasses.png		\
+ 	surfboard.png		\
+ 	hawaii-shirt.png
+-
+-imagesdir = $(datadir)/zenity
+-images_DATA = \
+ 	zenity.png		\
+ 	zenity-calendar.png	\
+ 	zenity-list.png		\
+@@ -20,4 +16,4 @@ images_DATA = \
+ 
+ man_MANS = zenity.1
+ 
+-EXTRA_DIST = $(images_DATA) $(clothes_DATA) $(man_MANS)
++EXTRA_DIST = $(images) $(man_MANS) zenity_data.gresource.xml
+diff --git a/data/zenity_data.gresource.xml b/data/zenity_data.gresource.xml
+new file mode 100644
+index 0000000..c56159d
+--- /dev/null
++++ b/data/zenity_data.gresource.xml
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<gresources>
++        <gresource prefix="/org/gnome/zenity/clothes">
++                <file>monk.png</file>
++                <file>gnome-tshirt.png</file>
++                <file>sunglasses.png</file>
++                <file>hawaii-shirt.png</file>
++        </gresource>
++        <gresource prefix="/org/gnome/zenity/images">
++                <file>zenity.png</file>
++                <file>zenity-calendar.png</file>
++                <file>zenity-list.png</file>
++                <file>zenity-file.png</file>
++                <file>zenity-progress.png</file>
++                <file>zenity-text.png</file>
++                <file>zenity-scale.png</file>
++                <file>zenity-entry.png</file>
++                <file>zenity-notification.png</file>
++        </gresource>
++</gresources>
+diff --git a/src/Makefile.am b/src/Makefile.am
+index bcdd205..2805bf0 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -2,7 +2,37 @@ bin_PROGRAMS = zenity
+ 
+ bin_SCRIPTS = gdialog
+ 
++zenity_resources = $(shell glib-compile-resources --sourcedir=$(top_srcdir)/src --generate-dependencies $(top_srcdir)/src/zenity.gresource.xml)
++zenity_data_resources = $(shell glib-compile-resources --sourcedir=$(top_srcdir)/data --generate-dependencies $(top_srcdir)/data/zenity_data.gresource.xml)
++
++# resources
++zenity-resources.h: $(top_srcdir)/src/zenity.gresource.xml $(zenity_resources)
++	glib-compile-resources --target=$@ --sourcedir=$(top_srcdir)/src --generate-header --c-name zenity $<
++
++zenity-resources.c: $(top_srcdir)/src/zenity.gresource.xml $(zenity_resources)
++	glib-compile-resources --target=$@ --sourcedir=$(top_srcdir)/src --generate-source --c-name zenity $<
++
++# data sources
++zenity-data-resources.h: $(top_srcdir)/data/zenity_data.gresource.xml $(zenity_data_resources)
++	glib-compile-resources --target=$@ --sourcedir=$(top_srcdir)/data --generate-header --c-name zenity_data $<
++
++zenity-data-resources.c: $(top_srcdir)/data/zenity_data.gresource.xml $(zenity_data_resources)
++	glib-compile-resources --target=$@ --sourcedir=$(top_srcdir)/data --generate-source --c-name zenity_data $<
++
++BUILT_SOURCES = \
++	zenity-resources.h \
++	zenity-resources.c \
++	zenity-data-resources.h \
++	zenity-data-resources.c
++
++CLEANFILES = \
++	$(BUILT_SOURCES)
++
+ zenity_SOURCES = \
++	zenity-resources.h \
++	zenity-resources.c \
++	zenity-data-resources.h \
++	zenity-data-resources.c \
+ 	about.c		\
+ 	calendar.c	\
+ 	entry.c		\
+@@ -43,15 +73,11 @@ zenity_LDADD = \
+ 	$(LIBNOTIFY_LIBS)	\
+ 	$(WEBKIT_LIBS)
+ 
+-uidir = $(datadir)/zenity
+-
+-ui_DATA = \
+-	zenity.ui
+-
+ DISTCLEANFILES= \
+ 	gdialog
+ 
+ EXTRA_DIST = \
+-	$(ui_DATA) \
++	zenity.ui \
++	zenity.gresource.xml \
+ 	gdialog \
+ 	gdialog.in
+diff --git a/src/about.c b/src/about.c
+index 486b641..c25f119 100644
+--- a/src/about.c
++++ b/src/about.c
+@@ -32,7 +32,7 @@
+ 
+ #define GTK_RESPONSE_CREDITS 0
+ #define ZENITY_HELP_PATH ZENITY_DATADIR "/help/"
+-#define ZENITY_CLOTHES_PATH ZENITY_DATADIR "/clothes/"
++#define ZENITY_CLOTHES_RESOURCE "/org/gnome/zenity/clothes/"
+ 
+ #define ZENITY_CANVAS_X 400.0
+ #define ZENITY_CANVAS_Y 280.0
+@@ -142,12 +142,12 @@ zenity_create_clothes (GtkWidget *canvas_board)
+ {
+   GdkPixbuf *pixbuf;
+   GnomeCanvasItem *canvas_item;
+-  gchar *pixbuf_path;
++  gchar *resource_path;
+   size_t i;
+ 
+   for (i = 0; i < G_N_ELEMENTS (monk_clothes); i++) {
+-    pixbuf_path = g_strconcat (ZENITY_CLOTHES_PATH, monk_clothes[i].filename, NULL); 
+-    pixbuf = gdk_pixbuf_new_from_file (pixbuf_path, NULL);
++    resource_path = g_strconcat (ZENITY_CLOTHES_RESOURCE, monk_clothes[i].filename, NULL); 
++    pixbuf = gdk_pixbuf_new_from_resource (resource_path, NULL);
+ 
+     canvas_item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (canvas_board)->root),
+                                          GNOME_TYPE_CANVAS_PIXBUF,
+@@ -181,7 +181,7 @@ zenity_create_monk (void)
+ 
+   gtk_widget_modify_bg (GTK_WIDGET (canvas_board), GTK_STATE_NORMAL, &color);
+ 
+-  pixbuf = gdk_pixbuf_new_from_file (ZENITY_CLOTHES_PATH "monk.png", NULL);
++  pixbuf = gdk_pixbuf_new_from_resource (ZENITY_CLOTHES_RESOURCE "monk.png", NULL);
+ 
+   canvas_item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (canvas_board)->root),
+                                        GNOME_TYPE_CANVAS_PIXBUF,
+@@ -204,7 +204,7 @@ zenity_create_boutique (void)
+ 
+   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+ 
+-  zenity_util_set_window_icon (window, NULL, ZENITY_IMAGE_FULLPATH ("zenity.png"));
++  zenity_util_set_window_icon (window, NULL, ZENITY_IMAGE_RESOURCE_PATH ("zenity.png"));
+   canvas = zenity_create_monk ();
+   gtk_container_add (GTK_CONTAINER (window), canvas);
+ 
+@@ -261,7 +261,7 @@ zenity_about (ZenityData *data)
+ 
+ 
+   translators = _("translator-credits");
+-  logo = gdk_pixbuf_new_from_file (ZENITY_IMAGE_FULLPATH ("zenity.png"), NULL);
++  logo = gdk_pixbuf_new_from_resource (ZENITY_IMAGE_RESOURCE_PATH ("zenity.png"), NULL);
+ 
+   license_trans = g_strconcat (_(license[0]), "\n", _(license[1]), "\n",
+                                _(license[2]), "\n", NULL);
+@@ -284,7 +284,7 @@ zenity_about (ZenityData *data)
+  
+   g_free (license_trans);
+ 
+-  zenity_util_set_window_icon (dialog, NULL, ZENITY_IMAGE_FULLPATH ("zenity.png"));
++  zenity_util_set_window_icon (dialog, NULL, ZENITY_IMAGE_RESOURCE_PATH ("zenity.png"));
+ 
+   g_signal_connect (G_OBJECT (dialog), "response",
+                     G_CALLBACK (zenity_about_dialog_response), data);
+diff --git a/src/calendar.c b/src/calendar.c
+index 9f82cc6..734bd78 100644
+--- a/src/calendar.c
++++ b/src/calendar.c
+@@ -62,7 +62,7 @@ zenity_calendar (ZenityData *data, ZenityCalendarData *cal_data)
+   if (data->dialog_title)	
+     gtk_window_set_title (GTK_WINDOW (dialog), data->dialog_title);
+ 
+-  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-calendar.png"));
++  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_RESOURCE_PATH ("zenity-calendar.png"));
+ 
+   if (data->width > -1 || data->height > -1)
+     gtk_window_set_default_size (GTK_WINDOW (dialog), data->width, data->height);
+diff --git a/src/entry.c b/src/entry.c
+index 8e47ebd..35d544f 100644
+--- a/src/entry.c
++++ b/src/entry.c
+@@ -76,7 +76,7 @@ zenity_entry (ZenityData *data, ZenityEntryData *entry_data)
+   if (data->dialog_title)
+     gtk_window_set_title (GTK_WINDOW (dialog), data->dialog_title);
+ 	
+-  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-entry.png"));
++  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_RESOURCE_PATH ("zenity-entry.png"));
+ 
+   if (data->width > -1 || data->height > -1)
+     gtk_window_set_default_size (GTK_WINDOW (dialog), data->width, data->height);
+diff --git a/src/fileselection.c b/src/fileselection.c
+index 27db0f4..37187c4 100644
+--- a/src/fileselection.c
++++ b/src/fileselection.c
+@@ -73,7 +73,7 @@ void zenity_fileselection (ZenityData *data, ZenityFileData *file_data)
+   if (data->dialog_title)
+     gtk_window_set_title (GTK_WINDOW (dialog), data->dialog_title);
+ 	
+-  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-file.png"));
++  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_RESOURCE_PATH ("zenity-file.png"));
+ 
+   if (data->modal)
+     gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+diff --git a/src/progress.c b/src/progress.c
+index 4995c5f..d75de61 100644
+--- a/src/progress.c
++++ b/src/progress.c
+@@ -300,7 +300,7 @@ zenity_progress (ZenityData *data, ZenityProgressData *progress_data)
+   if (data->dialog_title)
+     gtk_window_set_title (GTK_WINDOW (dialog), data->dialog_title);
+ 
+-  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-progress.png"));
++  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_RESOURCE_PATH ("zenity-progress.png"));
+ 
+   if (data->width > -1 || data->height > -1)
+     gtk_window_set_default_size (GTK_WINDOW (dialog), data->width, data->height);
+diff --git a/src/scale.c b/src/scale.c
+index 3eb5c17..2beea62 100644
+--- a/src/scale.c
++++ b/src/scale.c
+@@ -71,7 +71,7 @@ zenity_scale (ZenityData *data, ZenityScaleData *scale_data)
+   if (data->dialog_title)
+     gtk_window_set_title (GTK_WINDOW (dialog), data->dialog_title);
+ 
+-  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-scale.png"));
++  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_RESOURCE_PATH ("zenity-scale.png"));
+   
+   if (data->width > -1 || data->height > -1)
+     gtk_window_set_default_size (GTK_WINDOW (dialog), data->width, data->height);
+diff --git a/src/text.c b/src/text.c
+index 1deecc6..7233f87 100644
+--- a/src/text.c
++++ b/src/text.c
+@@ -237,7 +237,7 @@ zenity_text (ZenityData *data, ZenityTextData *text_data)
+   if (data->dialog_title)
+     gtk_window_set_title (GTK_WINDOW (dialog), data->dialog_title);
+ 
+-  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-text.png"));
++  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_RESOURCE_PATH ("zenity-text.png"));
+ 
+   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
+ 
+diff --git a/src/tree.c b/src/tree.c
+index 058b6b6..b04121b 100644
+--- a/src/tree.c
++++ b/src/tree.c
+@@ -420,7 +420,7 @@ zenity_tree (ZenityData *data, ZenityTreeData *tree_data)
+   if (tree_data->dialog_text)
+     gtk_label_set_markup (GTK_LABEL (text), g_strcompress (tree_data->dialog_text));
+ 
+-  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-list.png"));
++  zenity_util_set_window_icon (dialog, data->window_icon, ZENITY_IMAGE_RESOURCE_PATH ("zenity-list.png"));
+ 
+   if (data->width > -1 || data->height > -1)
+     gtk_window_set_default_size (GTK_WINDOW (dialog), data->width, data->height);
+diff --git a/src/util.c b/src/util.c
+index ddb0146..b010a34 100644
+--- a/src/util.c
++++ b/src/util.c
+@@ -80,23 +80,15 @@ zenity_util_load_ui_file (const gchar *root_widget, ...)
+   /* Enforce terminating NULL */
+   g_ptr_array_add (ptrarray, NULL);
+   objects = (gchar**) g_ptr_array_free (ptrarray, FALSE);
+-  
+-  if (g_file_test (ZENITY_UI_FILE_RELATIVEPATH, G_FILE_TEST_EXISTS)) {
+-    /* Try current dir, for debugging */
+-    result = gtk_builder_add_objects_from_file (builder,
+-    						ZENITY_UI_FILE_RELATIVEPATH,
+-						objects, NULL);
+-  }
+ 
+-  if (result == 0)
+-    result = gtk_builder_add_objects_from_file (builder,
+-    						ZENITY_UI_FILE_FULLPATH,
+-						objects, &error);
++  result = gtk_builder_add_objects_from_resource (builder,
++                                                  ZENITY_UI_RESOURCE,
++                                                  objects, NULL);
+ 
+   g_strfreev (objects);
+ 
+   if (result == 0) {
+-    g_warning ("Could not load ui file %s: %s", ZENITY_UI_FILE_FULLPATH,
++    g_warning ("Could not load ui file %s: %s", ZENITY_UI_RESOURCE,
+     						error->message);
+     g_error_free (error);
+     g_object_unref (builder);
+@@ -222,7 +214,7 @@ zenity_util_set_window_icon (GtkWidget *widget, const gchar *filename, const gch
+   if (filename != NULL) {
+     zenity_util_set_window_icon_from_file (widget, filename);
+   } else {
+-    pixbuf = gdk_pixbuf_new_from_file (default_file, NULL);
++    pixbuf = gdk_pixbuf_new_from_resource (default_file, NULL);
+     if (pixbuf != NULL) {
+       gtk_window_set_icon (GTK_WINDOW (widget), pixbuf);
+       g_object_unref (pixbuf);
+diff --git a/src/util.h b/src/util.h
+index c847cd4..2516aa0 100644
+--- a/src/util.h
++++ b/src/util.h
+@@ -7,10 +7,9 @@
+ 
+ G_BEGIN_DECLS
+ 
+-#define ZENITY_UI_FILE_FULLPATH              ZENITY_DATADIR "/zenity.ui"
+-#define ZENITY_UI_FILE_RELATIVEPATH          "./zenity.ui"
++#define ZENITY_UI_RESOURCE             "/org/gnome/zenity/zenity.ui"
+ 
+-#define ZENITY_IMAGE_FULLPATH(filename)         (ZENITY_DATADIR "/" filename)
++#define ZENITY_IMAGE_RESOURCE_PATH(filename)         ("/org/gnome/zenity/images" "/" filename)
+ 
+ GtkBuilder*     zenity_util_load_ui_file                  (const gchar    *widget_root, ...) G_GNUC_NULL_TERMINATED;
+ gchar *         zenity_util_strip_newline                 (gchar          *string);
+diff --git a/src/zenity.gresource.xml b/src/zenity.gresource.xml
+new file mode 100644
+index 0000000..1f1983d
+--- /dev/null
++++ b/src/zenity.gresource.xml
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<gresources>
++        <gresource prefix="/org/gnome/zenity">
++                <file preprocess="xml-stripblanks">zenity.ui</file>
++        </gresource>
++</gresources>
+-- 
+2.15.0
+
