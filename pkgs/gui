@@ -9,7 +9,9 @@ gdk-pixbuf
 hicolor-icon-theme
 adwaita-icon-theme
 font-clear-sans-ttf
+font-hack-ttf
 font-roboto-ttf
+font-ubuntu-ttf
 noto-sans-ttf
 shared-mime-info
 
