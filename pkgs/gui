@@ -2,8 +2,6 @@ at-spi2-atk
 libgtk-3
 dbus-launch
 
-zenity
-
 librsvg
 gdk-pixbuf
 hicolor-icon-theme

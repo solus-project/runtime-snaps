@@ -78,6 +78,7 @@ set -e
 init_root
 
 build_one linux-steam-integration
+build_one zenity
 
 # Now install all of our packages to our app root
 for i in $PACKAGE_OUT_DIR/*.eopkg ; do
