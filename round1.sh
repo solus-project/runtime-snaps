@@ -112,7 +112,7 @@ function clean_root()
     rm -rf "$ROOTDIR/var/log"
 
     # Nuke locale archive from glibc
-    rm -rf "$ROOTDIR/usr/lib64/locale"
+    # rm -rf "$ROOTDIR/usr/lib64/locale"
 
     # Clean up other unneeded dudes from qt bits
     rm -rf "$ROOTDIR/usr/lib64/kconf_update_bin"
