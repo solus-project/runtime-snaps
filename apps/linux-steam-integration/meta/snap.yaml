@@ -13,7 +13,7 @@ confinement: strict
 
 apps:
   linux-steam-integration:
-    command: /bin/steam-wrap.sh
+    command: /usr/bin/steam-wrap.sh
     plugs:
       - unity7
       - gsettings
@@ -23,7 +23,7 @@ apps:
       - pulseaudio
       - x11
   settings:
-    command: /bin/settings-wrap.sh
+    command: /usr/bin/settings-wrap.sh
     plugs:
       - unity7
       - gsettings
