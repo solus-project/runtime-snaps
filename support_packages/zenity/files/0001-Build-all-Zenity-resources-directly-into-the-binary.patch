@@ -1,7 +1,7 @@
-From b77aaaf0fa4188a025a7c69e58e4325833ce14bb Mon Sep 17 00:00:00 2001
+From 0238deeb5b6b8bad4822867c7b253407643ff60a Mon Sep 17 00:00:00 2001
 From: Ikey Doherty <ikey@solus-project.com>
 Date: Fri, 10 Nov 2017 21:59:35 +0000
-Subject: [PATCH] Build all Zenity resources directly into the binary
+Subject: [PATCH 1/2] Build all Zenity resources directly into the binary
 
 This makes it much easier to have a relocatable Zenity build that isn't
 dependent on fixed file paths, by having our .ui file and images contained

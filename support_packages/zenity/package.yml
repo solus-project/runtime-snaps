@@ -18,7 +18,7 @@ builddeps  :
     - itstool
     - yelp-tools-devel
 setup      : |
-    %patch -p1 < $pkgfiles/0001-Build-all-Zenity-resources-directly-into-the-binary.patch
+    %apply_patches
     %reconfigure --bindir=/bin
 build      : |
     %make

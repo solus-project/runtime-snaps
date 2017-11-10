@@ -1,0 +1,40 @@
+From 1310be7bc4aa5b13bd7a59d3e070223bf2440acb Mon Sep 17 00:00:00 2001
+From: Ikey Doherty <ikey@solus-project.com>
+Date: Fri, 10 Nov 2017 23:42:01 +0000
+Subject: [PATCH 2/2] Default to the dark variant of the GTK theme
+
+This will help Zenity blend in a little bit better within the context
+of the Steam runtime, by using a dark-mode window for presenting the
+license and errors.
+
+Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+---
+ src/main.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/main.c b/src/main.c
+index e667ee1..7af1069 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -38,6 +38,7 @@ gint
+ main (gint argc, gchar **argv) {
+   ZenityParsingOptions *results;
+   gint retval;
++  GtkSettings *settings = NULL;
+ 
+ #ifdef HAVE_LOCALE_H
+   setlocale(LC_ALL,"");
+@@ -49,6 +50,10 @@ main (gint argc, gchar **argv) {
+ 
+   gtk_init (&argc, &argv);
+ 
++  /* Forcibly use dark theme to feel less out of place with Steam */
++  settings = gtk_settings_get_default();
++  g_object_set(settings, "gtk-application-prefer-dark-theme", TRUE, NULL);
++
+   results = zenity_option_parse (argc, argv);
+ 
+   switch (results->mode) {
+-- 
+2.15.0
+
