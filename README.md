@@ -95,6 +95,15 @@ $ export LSI_DEBUG=1
 $ $SNAP/usr/bin/linux-steam-integration
 ```
 
+## Known Issues
+
+Tracking some currently known shortcomings here:
+
+ - No vulkan support yet (needs snapd + LSI work). Games using Vulkan WILL HANG. Don't use yet! (Sorry Feral, we'll fix it soon :D)
+ - No udev roles exposed to host. Talking with upstream to improve this in a new snapd interface
+ - No testing yet done outside Solus! Need to test biarch + multiarch distros with NVIDIA & open source drivers.
+ - "Home" for Steam is within the snap root. Removing snap will uninstall those local games
+ - Requires `--devmode` install as confinement isn't yet finished.
 
 ## License
 
