@@ -134,13 +134,13 @@ install_package baselayout --ignore-safety
 
 # Now lets fire in our core component, i.e. a working system.
 # Totally ignore system.base safety to minimise the system
-install_package --ignore-safety $(cat packages)
+install_package --ignore-safety $(cat pkgs/base)
 
 # Now install our graphical packages
-install_package --ignore-safety $(cat packages.gui)
+install_package --ignore-safety $(cat pkgs/gui)
 
 # Lastly, prep our runtime packages (+emul32 stuff)
-install_package --ignore-safety $(cat packages.steam-env)
+install_package --ignore-safety $(cat pkgs/gaming)
 
 # Ensure everything is good to go
 configure_pending
