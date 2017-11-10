@@ -15,6 +15,7 @@ apps:
   linux-steam-integration:
     command: /usr/bin/steam
     plugs:
+      - browser-support
       - unity7
       - gsettings
       - home
