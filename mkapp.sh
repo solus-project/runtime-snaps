@@ -84,6 +84,9 @@ for i in $PACKAGE_OUT_DIR/*.eopkg ; do
     extract_install_local $i
 done
 
+# For now just use Steam directly from the repos
+extract_install steam
+
 # Now lets cook a snap
 cook_snap linux-steam-integration
 
