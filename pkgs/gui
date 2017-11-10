@@ -3,6 +3,7 @@ libgtk-3
 dbus-launch
 
 librsvg
+libnotify
 gdk-pixbuf
 hicolor-icon-theme
 adwaita-icon-theme
