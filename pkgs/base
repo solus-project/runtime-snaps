@@ -35,3 +35,8 @@ util-linux
 which
 xz
 zip
+
+strace
+ltrace
+tee
+tree
