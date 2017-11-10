@@ -10,6 +10,7 @@ fi
 BASEDIR="`pwd`"
 WORKDIR="$BASEDIR/WORKDIR"
 ROOTDIR="$WORKDIR/BASE_ROOT"
+RUNTIME_DIR="$BASEDIR/runtimes"
 
 # Bit of house keeping to ensure package managers don't jank up the rootfs
 function init_root()
