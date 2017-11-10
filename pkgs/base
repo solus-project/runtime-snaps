@@ -38,5 +38,4 @@ zip
 
 strace
 ltrace
-tee
 tree
