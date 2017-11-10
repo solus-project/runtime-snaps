@@ -22,7 +22,7 @@ setup      : |
         %meson_configure -Dwith-shim=none $COMMONOPTS
     else
         # Enable frontend and shim for the 64-bit build
-        %meson_configure -Dwith-shim=replacement -Dwith-frontend=true -Dwith-steam-binary=%libdir%/steam/steam $COMMONOPTS
+        %meson_configure -Dwith-shim=replacement -Dwith-frontend=true -Dwith-steam-binary=/usr/lib/steam/steam $COMMONOPTS
     fi
 build      : |
     %meson_build
