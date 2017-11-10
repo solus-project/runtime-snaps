@@ -59,7 +59,9 @@ function build_one()
 
     pushd $workdir
     solbuild -p unstable-x86_64 build $sourcedir/package.yml
+    rm -fv *dbginfo*.eopkg || :
     mv *.eopkg "$PACKAGE_OUT_DIR/."
+    popd
 }
 
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
@@ -77,6 +79,11 @@ init_root
 
 build_one linux-steam-integration
 
+# Now install all of our packages to our app root
+for i in $PACKAGE_OUT_DIR/*.eopkg ; do
+    extract_install_local $i
+done
+
 # Now lets cook a snap
-# cook_snap linux-steam-integration
+cook_snap linux-steam-integration
 
