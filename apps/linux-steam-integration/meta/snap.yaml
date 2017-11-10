@@ -13,7 +13,7 @@ confinement: strict
 
 apps:
   linux-steam-integration:
-    command: /usr/bin/steam-wrap.sh
+    command: /usr/bin/steam
     plugs:
       - unity7
       - gsettings
