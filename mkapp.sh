@@ -78,6 +78,7 @@ set -e
 init_root
 
 build_one linux-steam-integration
+build_one lsb-release
 build_one zenity
 
 # Now install all of our packages to our app root
