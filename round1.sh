@@ -7,15 +7,15 @@ if [[ "$EUID" != "0" ]]; then
     exit 1
 fi
 
-ROOTDIR="`pwd`/ROOT"
 BASEDIR="`pwd`"
-RUNTIME_DIR="$BASEDIR/runtimes"
+WORKDIR="$BASEDIR/WORKDIR"
+ROOTDIR="$WORKDIR/BASE_ROOT"
 
 # Bit of house keeping to ensure package managers don't jank up the rootfs
 function init_root()
 {
     if [[ ! -d "$ROOTDIR" ]]; then
-        mkdir $ROOTDIR
+        mkdir -p $ROOTDIR
     fi
 
     mkdir -p $ROOTDIR/run/lock
