@@ -1,18 +1,32 @@
 runtime-snaps
 =============
 
-WIP: Staging area to begin building the Solus Gaming Runtime and port
-[Linux Steam* Integration](https://github.com/solus-project/linux-steam-integration) to [Snaps](https://snapcraft.io/)
+Combining the [Solus](https://solus-project.com) [Linux Steam Integration](https://github.com/solus-project/linux-steam-integration) project with [Snaps](https://snapcraft.io/) for universal gaming
 
-We are not currently planning on making an SDK available, as the runtime will
-primarily be derived from the Solus repositories, with minor layering happening
-within the local runtimes.
+This is currently a **Work In Progress**.
 
-As and when we have the core components in place we can start discussions around
-SDK + debugging availability.
+### Why what now?
 
-For now, this repository is public should people wish to watch the progress, note
-that there is nothing usable just yet.
+This is an ongoing effort to produce snaps to provide the Steam* client, Linux Steam Integration project,
+and Solus packages to create a true "universal app" variant of Steam that will work
+on every Linux distribution in the same way, while mitigating many of the runtime
+issues.
+
+This isn't just a "native Steam" effort, LSI is a highly complex project that seeks
+to replace the runtime almost entirely, and fix many issues. Integrating LSI is
+also a large undertaking - thus Solus is now seeking to share our work on our own
+runtime and LSI implementation with the rest of the Linux world for a pain-free
+and consistent gaming experience.
+
+A large element of this is also to help developers and studios targeting Linux
+as a platform to have a singular target that would work across all Linux distributions,
+and provide peace of mind that their games would work as **intended**. Additionally,
+as the keepers of LSI, we can rapidly deploy changes to LSI and the runtime to better
+support the games and alleviate regressions before they hit users.
+
+runtime-snaps is a [Solus project](https://solus-project.com/)
+
+![logo](https://build.solus-project.com/logo.png)
 
 ### Planned Usage
 
@@ -28,9 +42,14 @@ Note that for now we'll not be focusing on strict confinement, so the snaps
 should be installed with `--devmode` until such point as proper confinement
 is feasible.
 
-runtime-snaps is a [Solus project](https://solus-project.com/)
+We are not currently planning on making an SDK available, as the runtime will
+primarily be derived from the Solus repositories, with minor layering happening
+within the local runtimes.
 
-![logo](https://build.solus-project.com/logo.png)
+As and when we have the core components in place we can start discussions around
+SDK + debugging availability.
+
+
 
 How to build and run
 ====================
