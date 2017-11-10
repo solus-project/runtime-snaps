@@ -90,6 +90,9 @@ function configure_pending()
 
     # Update font cache
     chroot "$ROOTDIR" fc-cache -fv
+
+    # At this point lets seal it off and stick in our overriden files
+    cp -Rv "$BASEDIR/support_assets"/* "$ROOTDIR/."
 }
 
 function clean_root()
