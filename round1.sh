@@ -130,6 +130,8 @@ function cook_snap()
     snap pack "$ROOTDIR"
 }
 
+set -e
+set -x
 
 # Bring up the root tree
 init_root
