@@ -1,0 +1,30 @@
+name       : linux-steam-integration
+version    : '0.6'
+homepage   : https://github.com/solus-project/linux-steam-integration
+release    : 1
+source     :
+    - git|https://github.com/solus-project/linux-steam-integration.git : 6dbc333ea0f1483589924e94469832a42775f53b
+license    : LGPL-2.1
+component  : games
+summary    : Helper for enabling better Steam integration on Linux
+description: |
+    A helper shim to enable better Steam* integration on Linux systems. This is part of an effort by Solus to enhance Steam for everyone.
+builddeps  :
+    - pkgconfig(gtk+-3.0)
+emul32     : yes
+libsplit   : no
+patterns   :
+    - /usr/lib32  # LSI is required by Steam so you need 32-bit anyway.
+setup      : |
+    COMMONOPTS="-Dwith-libressl-mode=shim -Dwith-libressl-suffix=-libressl -Dwith-snap-support=true"
+    if [[ ! -z "${EMUL32BUILD}" ]]; then
+        # 32-bit build, default to building only libintercept
+        %meson_configure -Dwith-shim=none $COMMONOPTS
+    else
+        # Enable frontend and shim for the 64-bit build
+        %meson_configure -Dwith-shim=replacement -Dwith-frontend=true -Dwith-steam-binary=%libdir%/steam/steam $COMMONOPTS
+    fi
+build      : |
+    %meson_build
+install    : |
+    %meson_install
