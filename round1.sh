@@ -114,6 +114,10 @@ function clean_root()
     # Nuke locale archive from glibc
     rm -rf "$ROOTDIR/usr/lib64/locale"
 
+    # Clean up other unneeded dudes from qt bits
+    rm -rf "$ROOTDIR/usr/lib64/kconf_update_bin"
+    rm -rf "$ROOTDIR/usr/share/kconf_update"
+
     # Consider nuking system locales!
     # rm -rf "$ROOTDIR/usr/share/locale"
 }
@@ -145,6 +149,9 @@ install_package --ignore-safety $(cat pkgs/gui)
 
 # Lastly, prep our runtime packages (+emul32 stuff)
 install_package --ignore-safety $(cat pkgs/gaming)
+
+# Cosmetics, install breeze theme for integration, WITHOUT qt dependency
+install_package --ignore-safety --ignore-dependency breeze-gtk-theme
 
 # Ensure everything is good to go
 configure_pending
