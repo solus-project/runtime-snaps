@@ -1,7 +1,7 @@
 runtime-snaps
 =============
 
-Combining the [Solus](https://solus-project.com) [Linux Steam Integration](https://github.com/solus-project/linux-steam-integration) project with [Snaps](https://snapcraft.io/) for universal gaming
+Combining the [Solus](https://solus-project.com) runtime and [Linux Steam Integration](https://github.com/solus-project/linux-steam-integration) project with [Snaps](https://snapcraft.io/) for universal gaming
 
 This is currently a **Work In Progress**.
 
