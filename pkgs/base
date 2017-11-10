@@ -18,6 +18,7 @@ libgcrypt
 libgudev
 libgusb
 libusb
+lsb-release
 openssl
 perl
 polkit
