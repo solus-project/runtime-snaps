@@ -159,9 +159,7 @@ build_one glew16
 build_one libvpx1
 
 # Now install all of our packages to our app root
-for i in $PACKAGE_OUT_DIR/*.eopkg ; do
-    extract_install_local $i
-done
+install_package $PACKAGE_OUT_DIR/*.eopkg --ignore-safety
 
 rm -rf "$PACKAGE_OUT_DIR"
 
