@@ -77,6 +77,8 @@ set -e
 
 init_root
 
+build_one glew16
+build_one libvpx1
 build_one linux-steam-integration
 build_one lsb-release
 build_one zenity

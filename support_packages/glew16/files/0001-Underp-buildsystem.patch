@@ -1,0 +1,57 @@
+From a91dafa39d4def066c552c7ae067c85a8b6116a7 Mon Sep 17 00:00:00 2001
+From: Peter O'Connor <peter@solus-project.com>
+Date: Sat, 11 Nov 2017 13:04:17 +1100
+Subject: [PATCH] Update buildsystem
+
+Signed-off-by: Peter O'Connor <peter@solus-project.com>
+---
+ Makefile              |  3 ++-
+ config/Makefile.linux | 18 ++++++++++--------
+ 2 files changed, 12 insertions(+), 9 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 5637c2b..64bb151 100644
+--- a/Makefile
++++ b/Makefile
+@@ -41,8 +41,9 @@ $(error "Platform '$(SYSTEM)' not supported")
+ endif
+ 
+ GLEW_DEST ?= /usr
++ALIBDIR?= lib
+ BINDIR ?= $(GLEW_DEST)/bin
+-LIBDIR ?= $(GLEW_DEST)/lib
++LIBDIR ?= $(GLEW_DEST)/${ALIBDIR}
+ INCDIR ?= $(GLEW_DEST)/include/GL
+ SHARED_OBJ_EXT ?= o
+ 
+diff --git a/config/Makefile.linux b/config/Makefile.linux
+index 79eb308..1c345ad 100644
+--- a/config/Makefile.linux
++++ b/config/Makefile.linux
+@@ -1,14 +1,16 @@
+ NAME = $(GLEW_NAME)
+-CC = cc
+-LD = cc
++CC ?= cc
++LD ?= cc
+ PICFLAG = -fPIC
+-M_ARCH ?= $(shell uname -m)
+-ifeq (x86_64,${M_ARCH})
+-LDFLAGS.EXTRA = -L/usr/X11R6/lib64
+-LIBDIR = $(GLEW_DEST)/lib64
++ARCH64 ?= true
++ifeq (${ARCH64},true)
++  LDFLAGS.EXTRA = -L/usr/X11R6/lib64 -L/usr/lib64
++  LIBDIR = $(GLEW_DEST)/lib64
+ else
+-LDFLAGS.EXTRA = -L/usr/X11R6/lib
+-LIBDIR = $(GLEW_DEST)/lib
++  LDFLAGS.EXTRA = -L/usr/X11R6/lib -L/usr/lib
++  LIBDIR = $(GLEW_DEST)/lib
++  LDFLAGS.EXTRA = -L/usr/X11R6/lib32 -L/usr/lib32
++  LIBDIR = $(GLEW_DEST)/lib32
+ endif
+ LDFLAGS.GL = -lXmu -lXi -lGLU -lGL -lXext -lX11
+ LDFLAGS.STATIC = -Wl,-Bstatic
+--
+2.15.0
