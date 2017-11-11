@@ -32,4 +32,12 @@ install    : |
     if [[ -z "${EMUL32BUILD}" ]]; then
         # These are needed by the snap itself
         install -m 00755 $pkgfiles/*.sh $installdir/usr/bin/.
+
+        # Let's make our .desktop files available shall we..
+        install -D -d -m 00755 $installdir/meta/gui
+        mv $installdir/usr/share/applications/*.desktop $installdir/meta/gui/.
+        rmdir $installdir/usr/share/applications
+
+        # TODO: Restore settings!
+        rm -v $installdir/meta/gui/lsi-settings.desktop
     fi
