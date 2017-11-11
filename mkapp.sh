@@ -34,8 +34,6 @@ set -e
 
 init_root
 
-build_one glew16
-build_one libvpx1
 build_one linux-steam-integration
 build_one lsb-release
 build_one zenity
@@ -44,6 +42,9 @@ build_one zenity
 for i in $PACKAGE_OUT_DIR/*.eopkg ; do
     extract_install_local $i
 done
+
+rm -rf "$PACKAGE_OUT_DIR"
+
 
 # For now just use Steam directly from the repos
 extract_install steam

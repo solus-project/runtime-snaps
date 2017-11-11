@@ -154,6 +154,17 @@ install_package --ignore-safety $(cat pkgs/gaming)
 # Cosmetics, install breeze theme for integration, WITHOUT qt dependency
 install_package --ignore-safety --ignore-dependency breeze-gtk-theme
 
+# Our override directories.
+build_one glew16
+build_one libvpx1
+
+# Now install all of our packages to our app root
+for i in $PACKAGE_OUT_DIR/*.eopkg ; do
+    extract_install_local $i
+done
+
+rm -rf "$PACKAGE_OUT_DIR"
+
 # Ensure everything is good to go
 configure_pending
 
