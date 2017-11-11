@@ -49,6 +49,10 @@ rm -rf "$PACKAGE_OUT_DIR"
 # For now just use Steam directly from the repos
 extract_install steam
 
+# Let's get .desktop files in the right place
+mv "$ROOTDIR/usr/share/applications"/*.desktop "$ROOTDIR/meta/gui/."
+rmdir "$ROOTDIR/usr/share/applications"
+
 # Now lets cook a snap
 cook_snap linux-steam-integration
 
