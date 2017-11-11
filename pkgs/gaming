@@ -18,6 +18,7 @@ gnome-themes-standard-32bit
 gtk2-engine-murrine-32bit
 harfbuzz-32bit
 intel-tbb-32bit
+json-c-32bit
 kerberos-32bit
 libappindicator-32bit
 libatk-32bit
