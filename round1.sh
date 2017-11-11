@@ -7,10 +7,9 @@ if [[ "$EUID" != "0" ]]; then
     exit 1
 fi
 
-BASEDIR="`pwd`"
-WORKDIR="$BASEDIR/WORKDIR"
+ . common.sh
+
 ROOTDIR="$WORKDIR/BASE_ROOT"
-RUNTIME_DIR="$BASEDIR/runtimes"
 
 # Bit of house keeping to ensure package managers don't jank up the rootfs
 function init_root()
