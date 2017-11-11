@@ -16,19 +16,20 @@ apps:
     command: /usr/bin/steam
     plugs:
       - browser-support
-      - unity7
       - gsettings
+      - hardware-observe
       - home
       - network
       - opengl
       - pulseaudio
+      - unity7
       - x11
   settings:
     command: /usr/bin/settings-wrap.sh
     plugs:
-      - unity7
       - gsettings
       - home
       - opengl
       - pulseaudio
+      - unity7
       - x11
