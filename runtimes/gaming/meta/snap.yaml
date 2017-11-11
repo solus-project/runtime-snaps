@@ -12,6 +12,4 @@ description:
   application deployed through snap.
 type: base
 
-apps:
-  solus-runtime-gaming:
-    command: /bin/bash
+assumes: [snapd2.29.2]

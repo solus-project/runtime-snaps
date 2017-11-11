@@ -11,6 +11,8 @@ description:
   of many compatibility issues.
 confinement: strict
 
+assumes: [snapd2.29.2]
+
 apps:
   linux-steam-integration:
     command: /usr/bin/steam
