@@ -1,6 +1,7 @@
 acl-32bit
 alsa-plugins-32bit
 attr-32bit
+avahi-32bit
 bzip2-32bit
 cups-32bit
 curl-32bit
