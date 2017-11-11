@@ -72,6 +72,7 @@ ncurses-32bit
 network-manager-32bit
 openal-soft-32bit
 openldap-32bit
+pciutils-32bit
 pulseaudio-32bit
 rtmpdump-32bit
 sdl1-32bit
