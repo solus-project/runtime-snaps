@@ -1,0 +1,27 @@
+From be7bdfaca33482d968e240505a5b25195ff9678f Mon Sep 17 00:00:00 2001
+From: Ikey Doherty <ikey@solus-project.com>
+Date: Sat, 11 Nov 2017 05:19:41 +0000
+Subject: [PATCH] Integrate .desktop file with snapd
+
+Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+---
+ steam.desktop | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/steam.desktop b/steam.desktop
+index 8d48801..da4e55e 100644
+--- a/steam.desktop
++++ b/steam.desktop
+@@ -1,7 +1,8 @@
+ [Desktop Entry]
+ Name=Steam
+ Comment=Application for managing and playing games on Steam
+-Exec=/usr/bin/steam %U
++Exec=steam %U
++TryExec=${SNAP}/usr/bin/steam %U
+ Icon=steam
+ Terminal=false
+ Type=Application
+-- 
+2.15.0
+
