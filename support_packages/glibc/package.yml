@@ -53,6 +53,8 @@ setup      : |
     mkdir glibc-build
     pushd glibc-build
 
+    # TODO: Get some Ryzen+AVX2 tests done with multiple builds
+    # For now, just squeeze some juice.
     if [[ ! -z "${EMUL32BUILD}" ]]; then
         mkdir b32
         pushd b32
@@ -67,7 +69,7 @@ setup      : |
         export CC="gcc"
         export CXX="g++"
         export BUILDHOST="x86_64-solus-linux"
-        if [[ ! -z "${AVX2BUILD}"]]; then
+        if [[ ! -z "${AVX2BUILD}" ]]; then
             export CFLAGS="-O3 -g2 -mtune=skylake -march=haswell"
         else
             export CFLAGS="-O3 -g2 -mtune=generic -march=x86-64"
