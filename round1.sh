@@ -117,8 +117,12 @@ function clean_root()
     rm -rf "$ROOTDIR/usr/lib64/kconf_update_bin"
     rm -rf "$ROOTDIR/usr/share/kconf_update"
 
-    # Consider nuking system locales!
-    # rm -rf "$ROOTDIR/usr/share/locale"
+    # If we need these then we'll restore them..
+    rm -rf "$ROOTDIR/usr/share/locale"
+
+    # Nuke accidental .a fatties
+    rm "$ROOTDIR/usr/lib/*.a"
+    rm "$ROOTDIR/usr/lib32/*.a"
 }
 
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
