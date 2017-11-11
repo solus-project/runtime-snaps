@@ -5,6 +5,7 @@ dbus-launch
 librsvg
 libnotify
 gdk-pixbuf
+gtk-engines
 hicolor-icon-theme
 adwaita-icon-theme
 font-clear-sans-ttf

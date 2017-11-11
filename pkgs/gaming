@@ -23,6 +23,7 @@ kerberos-32bit
 libappindicator-32bit
 libatk-32bit
 libcap2-32bit
+libexif-32bit
 libgcc-32bit
 libgcrypt11-32bit
 libgcrypt-32bit
