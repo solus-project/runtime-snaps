@@ -31,6 +31,8 @@ libgomp-32bit
 libgudev-32bit
 libidn-32bit
 libjpeg-turbo6-32bit
+liblcms2-32bit
+libnotify-32bit
 libnspr-32bit
 libnss-32bit
 libpcre-32bit
@@ -53,6 +55,7 @@ libxext-32bit
 libxi-32bit
 libxft-32bit
 libxmu-32bit
+libxpm-32bit
 libxrandr-32bit
 libxscrnsaver-32bit
 libxshmfence-32bit
