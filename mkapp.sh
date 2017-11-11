@@ -35,6 +35,7 @@ set -e
 init_root
 
 build_one linux-steam-integration
+build_one steam
 build_one lsb-release
 build_one zenity
 
@@ -45,9 +46,6 @@ done
 
 rm -rf "$PACKAGE_OUT_DIR"
 
-
-# For now just use Steam directly from the repos
-extract_install steam
 
 # Let's get .desktop files in the right place
 mv "$ROOTDIR/usr/share/applications"/*.desktop "$ROOTDIR/meta/gui/."
