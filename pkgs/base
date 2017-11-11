@@ -36,7 +36,3 @@ util-linux
 which
 xz
 zip
-
-strace
-ltrace
-tree
