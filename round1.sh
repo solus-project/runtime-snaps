@@ -121,7 +121,7 @@ function clean_root()
     rm -rf "$ROOTDIR/usr/share/locale"
 
     # Nuke accidental .a fatties
-    rm "$ROOTDIR/usr/lib/*.a"
+    rm "$ROOTDIR/usr/lib64/*.a"
     rm "$ROOTDIR/usr/lib32/*.a"
 }
 
