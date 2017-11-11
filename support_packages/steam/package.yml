@@ -9,6 +9,7 @@ summary    : Launcher for the Steam software distribution service
 description: |
     Launcher for the Steam software distribution service
 install    : |
+    %patch -p1 < $pkgfiles/0001-Integrate-.desktop-file-with-snapd.patch
     %make_install install-bin install-docs install-icons install-bootstrap install-desktop
 
     # Integrate with LSI+Snap.

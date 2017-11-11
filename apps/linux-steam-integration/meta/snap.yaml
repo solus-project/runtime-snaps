@@ -15,7 +15,7 @@ assumes: [snapd2.29.2]
 
 apps:
   linux-steam-integration:
-    command: /usr/bin/steam
+    command: linux-steam-integration
     plugs:
       - browser-support
       - gsettings

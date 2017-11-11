@@ -40,4 +40,12 @@ install    : |
 
         # TODO: Restore settings!
         rm -v $installdir/meta/gui/lsi-settings.desktop
+
+        # meson mandates prefix/bin ...
+        install -D -d -m 00755 $installdir/bin
+        mv $installdir/usr/bin/* $installdir/bin/.
+
+        # Exported command goes into /
+        mv $installdir/bin/steam $installdir/linux-steam-integration
+        rmdir $installdir/usr/bin
     fi
