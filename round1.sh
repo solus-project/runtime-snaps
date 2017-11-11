@@ -118,8 +118,8 @@ function clean_root()
     rm -rf "$ROOTDIR/usr/share/locale"
 
     # Nuke accidental .a fatties
-    rm "$ROOTDIR/usr/lib64/*.a"
-    rm "$ROOTDIR/usr/lib32/*.a"
+    rm "$ROOTDIR/usr/lib64"/*.a
+    rm "$ROOTDIR/usr/lib32"/*.a
 }
 
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
