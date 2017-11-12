@@ -14,6 +14,7 @@ summary    :
     - demos: Mesa demonstration binaries
 optimize   : speed
 emul32     : yes
+libsplit   : no
 builddeps  :
     - pkgconfig(dri2proto)
     - pkgconfig(dri3proto)
