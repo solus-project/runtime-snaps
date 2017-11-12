@@ -26,6 +26,7 @@ builddeps  :
     - pkgconfig(presentproto)
     - pkgconfig32(vdpau)
     - pkgconfig(wayland-client)
+    - pkgconfig32(wayland-client)
     - pkgconfig(wayland-protocols)
     - pkgconfig32(xext)
     - pkgconfig32(xdamage)
