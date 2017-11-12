@@ -45,6 +45,7 @@ function build_one()
     pushd $workdir
     solbuild -p unstable-x86_64 build $sourcedir/package.yml
     rm -fv *dbginfo*.eopkg || :
+    rm -fv *-devel*.eopkg || :
     mv *.eopkg "$PACKAGE_OUT_DIR/."
     popd
 }
