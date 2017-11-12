@@ -21,8 +21,10 @@ apps:
       - gsettings
       - hardware-observe
       - home
+      - joystick
       - network
       - opengl
       - pulseaudio
+      - screen-inhibit-control
       - unity7
       - x11
