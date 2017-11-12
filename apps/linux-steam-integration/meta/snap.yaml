@@ -25,6 +25,7 @@ apps:
       - network
       - opengl
       - pulseaudio
+      - removable-media
       - screen-inhibit-control
       - unity7
       - x11
