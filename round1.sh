@@ -162,6 +162,9 @@ build_one libvpx1
 # Override glibc with our custom glibc
 build_one glibc
 
+# Now layer in our new shiny mesalib
+build_one mesa
+
 # Now install all of our packages to our app root
 install_package $PACKAGE_OUT_DIR/*.eopkg --ignore-safety
 
