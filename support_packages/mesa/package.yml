@@ -69,7 +69,7 @@ setup      : |
                --enable-shared-glapi \
                --with-vulkan-drivers=intel,radeon \
                --with-egl-platforms="drm,x11,wayland" \
-               --with-gallium-drivers="nouveau,r300,r600,radeonsi,svga,swrast,swr,virgl" \
+               --with-gallium-drivers="nouveau,r300,r600,radeonsi,svga,swrast" \
                --enable-dri3
 build      : |
     unset LD_AS_NEEDED
