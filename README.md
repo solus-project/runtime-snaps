@@ -114,7 +114,7 @@ LSI's Steam shim with debugging enabled.
 ```bash
 snap run --shell linux-steam-integration
 $ export LSI_DEBUG=1
-$ $SNAP/usr/bin/linux-steam-integration
+$ $SNAP/linux-steam-integration
 ```
 
 ## Known Issues
