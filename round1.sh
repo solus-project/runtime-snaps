@@ -120,6 +120,10 @@ function clean_root()
     # Nuke accidental .a fatties
     rm "$ROOTDIR/usr/lib64"/*.a
     rm "$ROOTDIR/usr/lib32"/*.a
+
+    # Fix avx2 links
+    ln -sv avx2 "$ROOTDIR/usr/lib64/haswell"
+    ln -sv avx2 "$ROOTDIR/usr/lib32/haswell"
 }
 
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
