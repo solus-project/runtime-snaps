@@ -90,6 +90,7 @@ sdl-gfx-32bit
 sdl-ttf-32bit
 systemd-32bit
 tcp_wrappers-32bit
+vulkan-32bit
 xz-32bit
 zlib-32bit
 
