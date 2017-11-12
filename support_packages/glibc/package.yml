@@ -1,8 +1,8 @@
 name       : glibc
-version    : 2.25
+version    : 2.26
 release    : 100
 source     :
-    - https://ftp.gnu.org/gnu/glibc/glibc-2.25.tar.xz : 067bd9bb3390e79aa45911537d13c3721f1d9d3769931a30c2681bfee66f23a0
+    - git|git://sourceware.org/git/glibc.git : a81c1156c1a9a6161d49b295a09a4e4cff7a88d0
 license    :
     - GPL-3.0
 summary    : This package contains the GNU C libraries and header files
@@ -33,13 +33,7 @@ setup      : |
     # Stateless /etc/shells
     %patch -p1 < $pkgfiles/0001-misc-Support-fallback-stateless-shells-path-in-absen.patch
 
-    # Security: https://sourceware.org/bugzilla/show_bug.cgi?id=19519
-    %patch -p1 < $pkgfiles/security/CVE-2017-8804.patch
-    %patch -p1 < $pkgfiles/security/CVE-2017-1000366.patch
-
     sed -e '/ia32/s/^/1:/' -e '/SSE2/s/^1://' -i  sysdeps/i386/i686/multiarch/mempcpy_chk.S
-    # AVX2 support from Clear Linux: https://dev.solus-project.com/T503
-    %patch -p1 < $pkgfiles/perf/0001-Add-avx2-fake-capability-like-tls.patch
 
     # Broken 64-bit unity games
     # https://bugzilla.redhat.com/show_bug.cgi?id=1440287
@@ -53,8 +47,6 @@ setup      : |
     mkdir glibc-build
     pushd glibc-build
 
-    # TODO: Get some Ryzen+AVX2 tests done with multiple builds
-    # For now, just squeeze some juice.
     if [[ ! -z "${EMUL32BUILD}" ]]; then
         mkdir b32
         pushd b32
@@ -70,7 +62,7 @@ setup      : |
         export CXX="g++"
         export BUILDHOST="x86_64-solus-linux"
         if [[ ! -z "${AVX2BUILD}" ]]; then
-            export CFLAGS="-O3 -g2 -mtune=skylake -march=haswell"
+            export CFLAGS="-O3 -g2 -mtune=haswell -march=haswell"
         else
             export CFLAGS="-O3 -g2 -mtune=generic -march=x86-64"
         fi
@@ -154,7 +146,6 @@ install    : |
         %make_install install_root=$installdir localedata/install-locales
 
         if [[ -z "${AVX2BUILD}" ]]; then
-
             if [[ -f $installdir/etc/ld.so.cache ]]; then
                 rm -v $installdir/etc/ld.so.cache
             fi
