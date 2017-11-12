@@ -12,7 +12,9 @@ component  : xorg.display
 summary    :
     - Mesa is an OpenGL compatible 3D graphics library.
     - demos: Mesa demonstration binaries
-optimize   : speed
+optimize   :
+    - lto
+    - speed
 emul32     : yes
 builddeps  :
     - pkgconfig(dri2proto)
