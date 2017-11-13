@@ -14,6 +14,8 @@ devel      : yes
 autodep    : no
 emul32     : yes
 avx2       : yes
+strip      : no
+debug:     : no
 component  : system.base
 patterns   :
     - 32bit : /lib/ld-linux.so.2
@@ -53,7 +55,7 @@ setup      : |
         export CC="gcc -m32"
         export CXX="g++ -m32"
         export BUILDHOST="i686-pc-linux-gnu"
-        export CFLAGS="-O3 -g2 -mtune=generic -march=i686"
+        export CFLAGS="-O3 -mtune=generic -march=i686"
         export _LOCALEDIR="/usr/lib32/locale"
     else
         mkdir b64
@@ -62,9 +64,9 @@ setup      : |
         export CXX="g++"
         export BUILDHOST="x86_64-solus-linux"
         if [[ ! -z "${AVX2BUILD}" ]]; then
-            export CFLAGS="-O3 -g2 -mtune=haswell -march=haswell"
+            export CFLAGS="-O3 -mtune=haswell -march=haswell"
         else
-            export CFLAGS="-O3 -g2 -mtune=generic -march=x86-64"
+            export CFLAGS="-O3 -mtune=generic -march=x86-64"
         fi
         export _LOCALEDIR="/usr/lib64/locale"
     fi
