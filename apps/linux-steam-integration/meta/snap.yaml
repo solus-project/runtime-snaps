@@ -9,7 +9,7 @@ description:
   Building on the solus-runtime-gaming and LSI efforts, this snap
   provides users with a highly tweaked build of Steam and takes care
   of many compatibility issues.
-confinement: devmode
+confinement: strict
 
 assumes: [snapd2.29.2]
 
