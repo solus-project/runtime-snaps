@@ -65,8 +65,7 @@ to **run** these snaps.
 ### `snapd` patches
 
  - https://github.com/snapcore/snapd/commit/ec4f3c0774620dd2bb6df765b337fa8a67d2afc8 ([patch](https://github.com/snapcore/snapd/commit/ec4f3c0774620dd2bb6df765b337fa8a67d2afc8.patch))
- - https://github.com/snapcore/snapd/pull/4199 ([patch](https://patch-diff.githubusercontent.com/raw/snapcore/snapd/pull/4199.patch))
- - https://github.com/snapcore/snapd/pull/4206 ([patch](https://patch-diff.githubusercontent.com/raw/snapcore/snapd/pull/4206.patch))
+ - https://github.com/snapcore/snapd/pull/4207 ([patch](https://patch-diff.githubusercontent.com/raw/snapcore/snapd/pull/4207.patch))
 
 **Note**: All of these patches are in Solus, with the exception of 4206, Vulkan support. This is in Solus unstable currently.
 
