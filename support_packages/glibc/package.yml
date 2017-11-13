@@ -84,7 +84,7 @@ setup      : |
     ../../configure \
            --enable-add-ons \
            --enable-bind-now \
-           --enable-kernel=3.14.32 \
+           --enable-kernel=3.2.0 \
            --without-cvs \
            --without-gd \
            --without-selinux \
