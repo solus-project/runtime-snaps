@@ -15,7 +15,7 @@ autodep    : no
 emul32     : yes
 avx2       : yes
 strip      : no
-debug:     : no
+debug      : no
 component  : system.base
 patterns   :
     - 32bit : /lib/ld-linux.so.2
