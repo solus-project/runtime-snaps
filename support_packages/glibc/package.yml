@@ -91,7 +91,6 @@ setup      : |
 
     ../../configure \
            --enable-add-ons \
-           --enable-bind-now \
            --enable-kernel=3.14.32 \
            --without-cvs \
            --without-gd \
@@ -107,11 +106,9 @@ setup      : |
            --build=${BUILDHOST} \
            --with-pkgversion='Solus' \
            --disable-debug \
-           --enable-bind-now \
            --enable-stack-protector=strong \
+           --enable-stackguard-randomization \
            --enable-tunables
-    popd
-    popd
 build      : |
     pushd glibc-build
     export LANGUAGE="C"
