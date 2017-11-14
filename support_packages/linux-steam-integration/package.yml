@@ -13,6 +13,7 @@ builddeps  :
     - pkgconfig(gtk+-3.0)
 emul32     : yes
 libsplit   : no
+optimize   : size
 patterns   :
     - /usr/lib32  # LSI is required by Steam so you need 32-bit anyway.
 setup      : |
