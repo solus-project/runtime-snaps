@@ -124,6 +124,7 @@ Tracking some currently known shortcomings here:
  - No testing yet done outside Solus! Need to test biarch + multiarch distros with NVIDIA & open source drivers.
  - "Home" for Steam is within the snap root. Removing snap will uninstall those local games
  - Requires `--devmode` install as confinement isn't yet finished.
+ - `LSI_DEBUG` will cause crashes on Ubuntu (potentially stack size issue?)
 
 ## License
 
