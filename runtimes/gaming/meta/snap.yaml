@@ -13,3 +13,4 @@ description:
 type: base
 
 assumes: [snapd2.29.2]
+grade: devel
