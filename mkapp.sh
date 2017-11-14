@@ -38,6 +38,7 @@ build_one linux-steam-integration
 build_one steam
 build_one lsb-release
 build_one zenity
+build_one mesa-demos
 
 # Now install all of our packages to our app root
 for i in $PACKAGE_OUT_DIR/*.eopkg ; do
