@@ -9,9 +9,7 @@ license    :
     - MIT
     - SGI-B-1.0
 component  : xorg.display
-summary    :
-    - Mesa is an OpenGL compatible 3D graphics library.
-    - demos: Mesa demonstration binaries
+summary    : Mesa is an OpenGL compatible 3D graphics library.
 optimize   : speed
 emul32     : yes
 libsplit   : no
@@ -42,10 +40,6 @@ builddeps  :
     - mako
     - git
     - vim
-patterns   :
-    - demos:
-        - /usr/bin
-        - /usr/share/man
 description: |
     Mesa is an OpenGL compatible 3D graphics library.
 setup      : |
@@ -73,21 +67,12 @@ setup      : |
                --with-gallium-drivers="nouveau,r300,r600,radeonsi,svga,swrast" \
                --enable-dri3
 build      : |
-    unset LD_AS_NEEDED
     %make
-    if [[ -z "${EMUL32BUILD}" ]]; then
-        %make -C xdemos DEMOS_PREFIX=/usr
-    fi
 install    : |
-    unset LD_AS_NEEDED
     %make_install
-    if [[ -z "${EMUL32BUILD}" ]]; then
-        %make_install -C xdemos DEMOS_PREFIX=/usr
-    fi
 
     # Move all of the libGL/libEGL out of the libdir into a subdir to ensure it
     # follows Solus requirements (LDM managed or in the case of snapd, out of the
     # way of any overlayed hostfs nvidia drivrs
     install -d -D -m 00755 $installdir/%libdir%/glx-provider/default
     mv -v $installdir/%libdir%/lib{EGL,GL}*.so* $installdir/%libdir%/glx-provider/default/.
-    
