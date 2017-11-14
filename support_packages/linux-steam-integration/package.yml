@@ -3,7 +3,7 @@ version    : '0.6'
 homepage   : https://github.com/solus-project/linux-steam-integration
 release    : 1
 source     :
-    - git|https://github.com/solus-project/linux-steam-integration.git : 1d339cab05f2909d3d53e0966eeea152582c7df9
+    - git|https://github.com/solus-project/linux-steam-integration.git : 657a91100424e4cc0e336623fb3e2e7494b02879
 license    : LGPL-2.1
 component  : games
 summary    : Helper for enabling better Steam integration on Linux
@@ -38,9 +38,6 @@ install    : |
         install -D -d -m 00755 $installdir/meta/gui
         mv $installdir/usr/share/applications/*.desktop $installdir/meta/gui/.
         rmdir $installdir/usr/share/applications
-
-        # TODO: Restore settings!
-        rm -v $installdir/meta/gui/lsi-settings.desktop
 
         # meson mandates prefix/bin ...
         install -D -d -m 00755 $installdir/bin
