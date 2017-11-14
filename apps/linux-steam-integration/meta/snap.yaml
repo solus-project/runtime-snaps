@@ -9,7 +9,8 @@ description:
   Building on the solus-runtime-gaming and LSI efforts, this snap
   provides users with a highly tweaked build of Steam and takes care
   of many compatibility issues.
-confinement: strict
+confinement: devmode
+grade: devel
 
 assumes: [snapd2.29.2]
 
@@ -28,6 +29,15 @@ apps:
       - pulseaudio
       - removable-media
       - screen-inhibit-control
+      - unity7
+      - x11
+
+  settings:
+    command: /bin/lsi-exec $SNAP/bin/lsi-settings
+    plugs:
+      - gsettings
+      - opengl
+      - pulseaudio
       - unity7
       - x11
 
