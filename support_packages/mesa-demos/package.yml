@@ -1,0 +1,35 @@
+name       : mesa-demos
+version    : 8.3.0
+release    : 1
+source     :
+    - https://mesa.freedesktop.org/archive/demos/8.3.0/mesa-demos-8.3.0.tar.gz : 6127c5511e63447b28c2df735739de06c5d221f68e7671cc0ee446e605e92357
+license    :
+    - BSL-1.0
+    - MIT
+    - SGI-B-1.0
+component  : xorg.display
+summary    : Demonstrations of the Mesa3D Library
+description: |
+    Demonstrations of the Mesa3D Library
+emul32     : yes
+builddeps  :
+    - pkgconfig32(freetype2)
+    - pkgconfig32(gl)
+    - pkgconfig32(glew)
+    - pkgconfig32(glu)
+    - pkgconfig32(libdrm)
+    - pkgconfig32(wayland-client)
+    - pkgconfig32(x11)
+    - pkgconfig32(xext)
+setup      : |
+    %configure --bindir=/bin
+build      : |
+    %make -C src/xdemos V=1
+install    : |
+    install -D -d -m 00755 $installdir/bin
+    if [[ ! -z "${EMUL32BUILD}" ]]; then
+        install -m 00755 src/xdemos/glxgears $installdir/bin/glxgears-32
+        install -m 00755 src/xdemos/glxinfo $installdir/bin/glxinfo-32
+    else
+        install -m 00755 src/xdemos/glx{gears,info} $installdir/bin/.
+    fi
