@@ -121,6 +121,26 @@ function clean_root()
     rm "$ROOTDIR/usr/lib64"/*.a
     rm "$ROOTDIR/usr/lib32"/*.a
 
+    rm -rf "$ROOTDIR/etc/NetworkManager"
+    rm -rf "$ROOTDIR/etc/systemd"
+    rm -rf "$ROOTDIR/etc/X11"
+    rm -rf "$ROOTDIR/lib/xtables"
+    rm -rf "$ROOTDIR/lib/security"
+    rm -rf "$ROOTDIR/usr/lib/ModemManager"
+    rm -rf "$ROOTDIR/usr/lib/network-manager"
+    rm -rf "$ROOTDIR/usr/lib/NetworkManager"
+    rm -rf "$ROOTDIR/usr/lib32/NetworkManager"
+    rm -rf "$ROOTDIR/usr/lib/cups"
+    rm -rf "$ROOTDIR/usr/lib/pulse-10.0"
+    rm -rf "$ROOTDIR/usr/lib/udev/rules.d"
+    rm -rf "$ROOTDIR/usr/lib/systemd"
+    rm -rf "$ROOTDIR/usr/lib/sysusers.d"
+    rm -rf "$ROOTDIR/usr/lib/tmpfiles.d"
+    rm -rf "$ROOTDIR/usr/share/base-layout"
+    rm -rf "$ROOTDIR/usr/share/bash-completion"
+    rm -rf "$ROOTDIR/usr/share/gettext"
+    rm -rf "$ROOTDIR/usr/share/gdb"
+
     # Fix avx2 links
     ln -sv avx2 "$ROOTDIR/usr/lib64/haswell"
     ln -sv avx2 "$ROOTDIR/usr/lib32/haswell"
