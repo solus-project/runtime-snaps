@@ -50,7 +50,7 @@ apps:
       - x11
 
   settings:
-    command: bin/linux-steam-integration.exec linux-steam-integration.settings
+    command: bin/linux-steam-integration.exec $SNAP/bin/linux-steam-integration.settings
     plugs:
       - gsettings
       - opengl
@@ -59,28 +59,28 @@ apps:
       - x11
 
   glxgears:
-    command: bin/linux-steam-integration.exec glxgears
+    command: bin/linux-steam-integration.exec $SNAP/bin/glxgears
     plugs:
       - opengl
       - unity7
       - x11
 
   glxgears-32:
-    command: bin/linux-steam-integration.exec glxgears-32
+    command: bin/linux-steam-integration.exec $SNAP/bin/glxgears-32
     plugs:
       - opengl
       - unity7
       - x11
 
   glxinfo:
-    command: bin/linux-steam-integration.exec glxinfo
+    command: bin/linux-steam-integration.exec $SNAP/bin/glxinfo
     plugs:
       - opengl
       - unity7
       - x11
 
   glxinfo-32:
-    command: bin/linux-steam-integration.exec glxinfo-32
+    command: bin/linux-steam-integration.exec $SNAP/bin/glxinfo-32
     plugs:
       - opengl
       - unity7
