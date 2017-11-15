@@ -141,6 +141,17 @@ function clean_root()
     rm -rf "$ROOTDIR/usr/share/gettext"
     rm -rf "$ROOTDIR/usr/share/gdb"
 
+    # Clean up some unnecessary setuid crap
+    rm -v "$ROOTDIR/bin/mount"
+    rm -v "$ROOTDIR/bin/umount"
+    rm -v "$ROOTDIR/sbin/unix_chkpwd"
+    rm -v "$ROOTDIR/usr/bin/ksu"
+    rm -v "$ROOTDIR/usr/bin/pkexec"
+    rm -v "$ROOTDIR/usr/bin/wall"
+    rm -v "$ROOTDIR/usr/lib/dbus-1.0/dbus-daemon-launch-helper"
+    rm -v "$ROOTDIR/usr/lib/polkit-1/polkit-agent-helper-1"
+    rm -rf "$ROOTDIR/var/spool/cups/tmp"
+
     # Fix avx2 links
     ln -sv avx2 "$ROOTDIR/usr/lib64/haswell"
     ln -sv avx2 "$ROOTDIR/usr/lib32/haswell"
