@@ -50,6 +50,9 @@ setup      : |
     # https://sourceware.org/bugzilla/show_bug.cgi?id=15533
     %patch -p1 < $pkgfiles/perf/fix-ld-audit-performance.patch
 
+    # https://sourceware.org/bugzilla/show_bug.cgi?id=21661
+    %patch -p1 < $pkgfiles/0005-fix-binutils-2-29-build.patch
+
     mkdir glibc-build
     pushd glibc-build
 
