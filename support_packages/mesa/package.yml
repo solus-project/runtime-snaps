@@ -10,7 +10,9 @@ license    :
     - SGI-B-1.0
 component  : xorg.display
 summary    : Mesa is an OpenGL compatible 3D graphics library.
-optimize   : speed
+optimize   :
+    - speed
+    - lto
 emul32     : yes
 libsplit   : no
 builddeps  :
@@ -43,6 +45,7 @@ builddeps  :
 description: |
     Mesa is an OpenGL compatible 3D graphics library.
 setup      : |
+    unset LD_AS_NEEDED
     %apply_patches
     %configure --disable-static \
                --with-clang-libdir=%libdir%/clang \
@@ -67,8 +70,10 @@ setup      : |
                --with-gallium-drivers="nouveau,r300,r600,radeonsi,svga,swrast" \
                --enable-dri3
 build      : |
+    unset LD_AS_NEEDED
     %make
 install    : |
+    unset LD_AS_NEEDED
     %make_install
 
     # Move all of the libGL/libEGL out of the libdir into a subdir to ensure it
