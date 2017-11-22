@@ -4,12 +4,9 @@ summary: Solus Gaming Runtime
 architectures:
   - amd64
 description:
-  The Solus Gaming Runtime provides a Solus-derived runtime for
-  other snaps to base on.
-
-  This snap is required for linux-steam-integration, and provides
-  all of the relevant components to build a stable gaming orientated
-  application deployed through snap.
+  This snap should only be used within the context of linux-steam-integration,
+  as it provides the core rootfs required for it to run gaming specific workloads,
+  and is not intended as a general-purpose solution.
 type: base
 
 assumes: [snapd2.29.2]
