@@ -1,0 +1,6 @@
+ - Provide abireport for solus-runtime-gaming
+ - Base versioning from Solus, i.e. 3.x.x
+ - Build mesa with `--with-swr-archs="avx,avx2,skx"`
+ - "Borrow" clear mesa patches
+ - Switch to mesa from git
+ - Ensure VA is active
