@@ -50,6 +50,8 @@ libressl-shim-32bit
 libunistring-32bit
 libusb-32bit
 libva-32bit
+libva-intel-driver
+libva-vdpau-driver
 libvdpau-32bit
 libx11-32bit
 libxcomposite-32bit
