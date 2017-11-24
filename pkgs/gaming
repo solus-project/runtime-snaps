@@ -3,6 +3,7 @@ alsa-plugins-32bit
 attr-32bit
 avahi-32bit
 bzip2-32bit
+colord-32bit
 cups-32bit
 curl-32bit
 curl-gnutls-32bit
@@ -42,6 +43,7 @@ libpcre-32bit
 libpcre3-32bit
 libpng12-32bit
 libpng-32bit
+librest-32bit
 librsvg-32bit
 libsamplerate-32bit
 libtheora-32bit
