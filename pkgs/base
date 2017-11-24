@@ -19,6 +19,7 @@ libgcrypt
 libgudev
 libgusb
 libusb
+kmod
 openssl
 perl
 polkit
