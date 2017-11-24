@@ -1,5 +1,5 @@
 name: solus-runtime-gaming
-version: 0.0.0
+version: 3.0.0
 summary: Solus Gaming Runtime
 architectures:
   - amd64
