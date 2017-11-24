@@ -152,6 +152,10 @@ function clean_root()
     rm -v "$ROOTDIR/usr/lib/polkit-1/polkit-agent-helper-1"
     rm -rf "$ROOTDIR/var/spool/cups/tmp"
 
+    # systemd things, breaking dependencies
+    rm -vf "$ROOTDIR/usr/bin/"systemd*
+    rm -vf "$ROOTDIR/usr/bin/"*ctl
+
     # Fix avx2 links
     ln -sv avx2 "$ROOTDIR/usr/lib64/haswell"
     ln -sv avx2 "$ROOTDIR/usr/lib32/haswell"
