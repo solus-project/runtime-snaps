@@ -1,2 +1,3 @@
 /WORKDIR/
 *.snap
+squashfs-root
