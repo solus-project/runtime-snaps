@@ -72,19 +72,29 @@ to **run** these snaps.
 After installing the relevant snapd, ensure your apparmor rules are applied and snapd has been
 restarted. Be lazy, reboot. People do it.
 
-### Build solus-runtime-gaming
+For Ubuntu users you may use the [Snappy Edge PPA](https://launchpad.net/~snappy-dev/+archive/ubuntu/edge)
+
+## Install from the store
+
+```
+sudo snap install --edge solus-runtime-gaming
+sudo snap install --devmode --edge linux-steam-integration
+snap run linux-steam-integration
+```
+
+### Build solus-runtime-gaming (Solus only)
 
 ```bash
 sudo ./round1.sh
 ````
 
-### Build linux-steam-integration
+### Build linux-steam-integration (Solus only)
 
 ```bash
 sudo ./mkapp.sh
 ```
 
-### Installation
+### Installation (custom build)
 
 You must first remove the existing installs if you've already run this step before:
 
