@@ -67,7 +67,7 @@ to **run** these snaps.
  - https://github.com/snapcore/snapd/commit/ec4f3c0774620dd2bb6df765b337fa8a67d2afc8 ([patch](https://github.com/snapcore/snapd/commit/ec4f3c0774620dd2bb6df765b337fa8a67d2afc8.patch))
  - https://github.com/snapcore/snapd/pull/4207 ([patch](https://patch-diff.githubusercontent.com/raw/snapcore/snapd/pull/4207.patch))
 
-**Note**: All of these patches are in Solus, with the exception of 4206, Vulkan support. This is in Solus unstable currently.
+**Note**: All of these patches are in Solus
 
 After installing the relevant snapd, ensure your apparmor rules are applied and snapd has been
 restarted. Be lazy, reboot. People do it.
