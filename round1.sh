@@ -75,7 +75,9 @@ function add_repo()
 function configure_pending()
 {
     # Now ask usysconf to finish up for us
+    mount --bind /proc "$ROOTDIR/proc"
     chroot "$ROOTDIR" /usr/sbin/usysconf run -f
+    umount "$ROOTDIR/proc"
 
     # At this point lets seal it off and stick in our overriden files
     cp -Rv "$BASEDIR/support_assets"/* "$ROOTDIR/."
