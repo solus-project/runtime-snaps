@@ -1,3 +1,0 @@
- - Build mesa with `--with-swr-archs="avx,avx2,skx"`
- - "Borrow" clear mesa patches
- - Switch to mesa from git
