@@ -3,6 +3,7 @@ bzip2
 ca-certs
 coreutils
 cpio
+cryptsetup
 curl
 dbus
 dbus-glib
