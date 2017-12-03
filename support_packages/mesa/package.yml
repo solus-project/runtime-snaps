@@ -13,6 +13,7 @@ summary    : Mesa is an OpenGL compatible 3D graphics library.
 optimize   :
     - speed
     - lto
+    - no-symbolic
 emul32     : yes
 libsplit   : no
 builddeps  :
