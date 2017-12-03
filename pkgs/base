@@ -33,6 +33,7 @@ time
 tzdata
 unzip
 usbutils
+usysconf
 util-linux
 which
 xz

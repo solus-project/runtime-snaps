@@ -77,19 +77,8 @@ function configure_pending()
     # Update ldconfig now
     chroot "$ROOTDIR" /sbin/ldconfig -X
 
-    # Ensure SSL certificates work
-    chroot "$ROOTDIR" c_rehash
-
-    # Update mime cache
-    chroot "$ROOTDIR" update-mime-database /usr/share/mime
-
-    # This also needs a better story, maybe just running eopkg configure pending eh? :)
-    for dirn in "$ROOTDIR"/usr/share/icons/*; do
-        gtk-update-icon-cache -f "$dirn"
-    done
-
-    # Update font cache
-    chroot "$ROOTDIR" fc-cache -fv
+    # Now ask usysconf to finish up for us
+    chroot "$ROOTDIR" eopkg configure-pending
 
     # At this point lets seal it off and stick in our overriden files
     cp -Rv "$BASEDIR/support_assets"/* "$ROOTDIR/."
