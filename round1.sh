@@ -76,6 +76,8 @@ function configure_pending()
 {
     # Now ask usysconf to finish up for us
     mount --bind /proc "$ROOTDIR/proc"
+    # Force a machine for this new image
+    chroot "$ROOTDIR" /usr/bin/systemd-machine-id-setup
     chroot "$ROOTDIR" /usr/sbin/usysconf run -f
     umount "$ROOTDIR/proc"
 
