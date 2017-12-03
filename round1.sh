@@ -74,11 +74,8 @@ function add_repo()
 # be put in place.
 function configure_pending()
 {
-    # Update ldconfig now
-    chroot "$ROOTDIR" /sbin/ldconfig -X
-
     # Now ask usysconf to finish up for us
-    chroot "$ROOTDIR" eopkg configure-pending
+    chroot "$ROOTDIR" /usr/sbin/usysconf run -f
 
     # At this point lets seal it off and stick in our overriden files
     cp -Rv "$BASEDIR/support_assets"/* "$ROOTDIR/."
