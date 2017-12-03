@@ -146,6 +146,9 @@ function clean_root()
     rm -vf "$ROOTDIR/usr/bin/"systemd*
     rm -vf "$ROOTDIR/usr/bin/"*ctl
 
+    # Fix stuff not meant to be there like /dev/lp* nodes from tmpfiles snippets
+    rm -vf "$ROOTDIR/dev/"*
+
     # Fix avx2 links
     ln -sv avx2 "$ROOTDIR/usr/lib64/haswell"
     ln -sv avx2 "$ROOTDIR/usr/lib32/haswell"
