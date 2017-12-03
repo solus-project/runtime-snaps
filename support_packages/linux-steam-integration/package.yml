@@ -3,7 +3,7 @@ version    : '0.6'
 homepage   : https://github.com/solus-project/linux-steam-integration
 release    : 1
 source     :
-    - git|https://github.com/solus-project/linux-steam-integration.git : 383b6492b5fd6912bc948585c44eaf19c3b6f1d4
+    - git|https://github.com/solus-project/linux-steam-integration.git : 0faa29aecd1953af5397d33e60c56cf2b868fa71
 license    : LGPL-2.1
 component  : games
 summary    : Helper for enabling better Steam integration on Linux
