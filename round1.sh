@@ -148,6 +148,9 @@ function clean_root()
     # Fix avx2 links
     ln -sv avx2 "$ROOTDIR/usr/lib64/haswell"
     ln -sv avx2 "$ROOTDIR/usr/lib32/haswell"
+
+    # Provide symlink to keep fonts happy inside the image
+    ln -sv "/usr/share/fonts" "$ROOTDIR/etc/fonts"
 }
 
 # Cheap and dirty, copy the named runtime meta into the root and tell it to
