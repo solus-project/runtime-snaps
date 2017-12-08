@@ -1,8 +1,8 @@
 name       : mesalib
-version    : 17.3.0_rc5
+version    : 17.3.0
 release    : 100
 source     :
-    - https://mesa.freedesktop.org/archive/mesa-17.3.0-rc5.tar.xz : c59f4e007fdac9b95168c35ec2e98d5de10ef753a90a8d3486b632ccdabaa7a0
+    - https://mesa.freedesktop.org/archive/mesa-17.3.0.tar.xz : 29a0a3a6c39990d491a1a58ed5c692e596b3bfc6c01d0b45e0b787116c50c6d9
 homepage   : http://mesa3d.org/
 license    :
     - BSL-1.0
