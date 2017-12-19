@@ -108,8 +108,8 @@ function clean_root()
     rm -rf "$ROOTDIR/usr/share/locale"
 
     # Nuke accidental .a fatties
-    rm "$ROOTDIR/usr/lib64"/*.a
-    rm "$ROOTDIR/usr/lib32"/*.a
+    rm -fv "$ROOTDIR/usr/lib64"/*.a
+    rm -fv "$ROOTDIR/usr/lib32"/*.a
 
     rm -rf "$ROOTDIR/etc/NetworkManager"
     rm -rf "$ROOTDIR/etc/systemd"
