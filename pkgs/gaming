@@ -51,6 +51,7 @@ libtxc_dxtn-32bit
 libressl-shim-32bit
 libunistring-32bit
 libusb-32bit
+libva1-32bit
 libva-32bit
 libva-intel-driver
 libva-vdpau-driver
