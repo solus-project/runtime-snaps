@@ -192,7 +192,6 @@ install_package --ignore-safety --ignore-dependency breeze-gtk-theme
 
 # Our override directories.
 build_one glew16
-build_one libvpx1
 
 # Override glibc with our custom glibc
 build_one glibc
