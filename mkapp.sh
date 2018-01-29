@@ -28,6 +28,7 @@ function write_wrapper()
 {
     local shfile="$ROOTDIR/command-$1.wrapper"
     echo "#!/bin/sh" > "$shfile"
+    echo "cd \"\$SNAP_USER_COMMON\"" >> "$shfile"
     echo "exec \$SNAP/bin/linux-steam-integration.exec \$SNAP/bin/$1 \$*" >> "$shfile"
     chmod 00755 $shfile
 }
@@ -64,4 +65,3 @@ done
 
 # Now lets cook a snap
 cook_snap linux-steam-integration
-
