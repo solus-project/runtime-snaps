@@ -12,7 +12,7 @@ description:
 confinement: devmode
 grade: devel
 
-assumes: [snapd2.29.2]
+assumes: [snapd2.30]
 
 apps:
 
