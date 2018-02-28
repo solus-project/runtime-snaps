@@ -5,6 +5,13 @@ Combining the [Solus](https://solus-project.com) runtime and [Linux Steam Integr
 
 This is currently a **Work In Progress**.
 
+# WARNING - HIGHLY VOLATILE
+
+We're now undergoing the upstreaming process for the new `steam-support` interface, as such
+consider the existing snaps broken, and you in need of a new snapd with the new support. We're
+also going to drop `devmode` support now and move to `strict` confinement, so please consider
+the vast majority of this document incorrect.
+
 ### Why what now?
 
 This is an ongoing effort to produce snaps to provide the Steam* client, Linux Steam Integration project,
