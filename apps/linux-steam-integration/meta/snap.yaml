@@ -19,7 +19,6 @@ apps:
   linux-steam-integration:
     command: linux-steam-integration
     plugs:
-      - browser-support
       - gsettings
       - hardware-observe
       - home
@@ -29,6 +28,7 @@ apps:
       - pulseaudio
       - removable-media
       - screen-inhibit-control
+      - steam-support
       - unity7
       - x11
 
@@ -36,7 +36,6 @@ apps:
   exec:
     command: bin/linux-steam-integration.exec
     plugs:
-      - browser-support
       - gsettings
       - hardware-observe
       - home
@@ -46,6 +45,7 @@ apps:
       - pulseaudio
       - removable-media
       - screen-inhibit-control
+      - steam-support
       - unity7
       - x11
 
